@@ -32,7 +32,7 @@ def createPoints(inshp, outshp, mini_dist):
     from functools import partial
     import pyproj
     from fiona.crs import from_epsg
-    
+
     count = 0
     s = {'trunk_link','tertiary','motorway','motorway_link','steps', None, ' ','pedestrian','primary', 'primary_link','footway','tertiary_link', 'trunk','secondary','secondary_link','tertiary_link','bridleway','service'}
     
@@ -68,7 +68,7 @@ def createPoints(inshp, outshp, mini_dist):
     }
 
     # Create pointS along the streets
-    with fiona.drivers():
+    with fiona.Env():
         #with fiona.open(outshp, 'w', 'ESRI Shapefile', crs=source.crs, schema) as output:
         with fiona.open(outshp, 'w', crs = from_epsg(4326), driver = 'ESRI Shapefile', schema = schema) as output:
             for line in fiona.open(temp_cleanedStreetmap):
