@@ -105,7 +105,7 @@ if __name__ == "__main__":
     import os,os.path
     import sys
     
-    root = 'MYPATHH//spatial-data'
+    root = os.getcwd()
     inshp = os.path.join(root,'CambridgeStreet_wgs84.shp')
     outshp = os.path.join(root,'Cambridge20m.shp')
     mini_dist = 20 #the minimum distance between two generated points in meter
