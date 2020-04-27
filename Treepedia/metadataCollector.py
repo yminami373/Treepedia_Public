@@ -3,7 +3,7 @@
 
 # Copyright(C) Xiaojiang Li, Ian Seiferling, Marwa Abdulhai, Senseable City Lab, MIT 
 
-def GSVpanoMetadataCollector(samplesFeatureClass,num,ouputTextFolder):
+def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, num):
     '''
     This function is used to call the Google API url to collect the metadata of
     Google Street View Panoramas. The input of the function is the shpfile of the create sample site, the output
@@ -109,5 +109,5 @@ if __name__ == "__main__":
     inputShp = os.path.join(root,'Cambridge20m.shp')
     outputTxt = root
     
-    GSVpanoMetadataCollector(inputShp, num=1000, outputTxt)
+    GSVpanoMetadataCollector(inputShp, outputTxt, num=1000)
 
