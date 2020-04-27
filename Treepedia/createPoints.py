@@ -22,6 +22,9 @@ def createPoints(inshp, outshp, mini_dist):
     
     '''
     
+    import warnings
+    warnings.simplefilter(action='ignore', category=FutureWarning)
+
     import fiona
     import os,os.path
     from shapely.geometry import shape,mapping
@@ -29,7 +32,6 @@ def createPoints(inshp, outshp, mini_dist):
     from functools import partial
     import pyproj
     from fiona.crs import from_epsg
-    
     
     count = 0
     s = {'trunk_link','tertiary','motorway','motorway_link','steps', None, ' ','pedestrian','primary', 'primary_link','footway','tertiary_link', 'trunk','secondary','secondary_link','tertiary_link','bridleway','service'}
