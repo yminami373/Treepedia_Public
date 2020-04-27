@@ -11,7 +11,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass,num,ouputTextFolder):
     
     Parameters: 
         samplesFeatureClass: the shapefile of the create sample sites
-        num: the number of sites proced every time
+        num: the number of sites proced every time. If batch size is 1000, the code will save metadata of every 1000 point to a txt file.
         ouputTextFolder: the output folder for the panoinfo
         
     '''
@@ -109,5 +109,5 @@ if __name__ == "__main__":
     inputShp = os.path.join(root,'Cambridge20m.shp')
     outputTxt = root
     
-    GSVpanoMetadataCollector(inputShp,1000,outputTxt)
+    GSVpanoMetadataCollector(inputShp, num=1000, outputTxt)
 
