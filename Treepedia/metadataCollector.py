@@ -88,10 +88,10 @@ def GSVpanoMetadataCollector(samplesFeatureClass,num,ouputTextFolder):
                     panoInfo = data['panorama']['data_properties']
                                         
                     # get the meta data of the panorama
-                    panoDate = panoInfo.items()[4][1]
-                    panoId = panoInfo.items()[5][1]
-                    panoLat = panoInfo.items()[8][1]
-                    panoLon = panoInfo.items()[9][1]
+                    panoDate = list(panoInfo.items())[4][1]
+                    panoId = list(panoInfo.items())[5][1]
+                    panoLat = list(panoInfo.items())[8][1]
+                    panoLon = list(panoInfo.items())[9][1]
                     
                     print('The coordinate (%s,%s), panoId is: %s, panoDate is: %s'%(panoLon,panoLat,panoId, panoDate))
                     lineTxt = 'panoID: %s panoDate: %s longitude: %s latitude: %s\n'%(panoId, panoDate, panoLon, panoLat)
