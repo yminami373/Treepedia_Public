@@ -21,6 +21,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass,num,ouputTextFolder):
     import ogr, osr
     import time
     import os,os.path
+    import math
     
     if not os.path.exists(ouputTextFolder):
         os.makedirs(ouputTextFolder)
@@ -39,7 +40,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass,num,ouputTextFolder):
     # loop all the features in the featureclass
     feature = layer.GetNextFeature()
     featureNum = layer.GetFeatureCount()
-    batch = featureNum/num
+    batch = math.ceil(featureNum/num)
     
     for b in range(batch):
         # for each batch process num GSV site
