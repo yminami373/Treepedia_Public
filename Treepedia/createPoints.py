@@ -53,7 +53,7 @@ def createPoints(inshp, outshp, mini_dist):
                     continue
             except:
                 # if the street map is not osm, do nothing. You'd better to clean the street map, if you don't want to map the GVI for highways
-                key = dest.schema['properties'].keys()[0] # get the field of the input shapefile and duplicate the input feature
+                key = list(dest.schema['properties'].keys())[0] # get the field of the input shapefile and duplicate the input feature
                 i = feat['properties'][key]
                 if i in s:
                     continue
