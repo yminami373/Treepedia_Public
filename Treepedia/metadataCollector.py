@@ -18,7 +18,6 @@ def GSVpanoMetadataCollector(samplesFeatureClass,num,ouputTextFolder):
     
     import urllib
     import xmltodict
-    import cStringIO
     import ogr, osr
     import time
     import os,os.path
