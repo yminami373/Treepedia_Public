@@ -16,7 +16,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass,num,ouputTextFolder):
         
     '''
     
-    import urllib,urllib2
+    import urllib
     import xmltodict
     import cStringIO
     import ogr, osr
@@ -76,7 +76,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass,num,ouputTextFolder):
                 
                 time.sleep(0.05)
                 # the output result of the meta data is a xml object
-                metaDataxml = urllib2.urlopen(urlAddress)
+                metaDataxml = urllib.request.urlopen(urlAddress)
                 metaData = metaDataxml.read()    
                 
                 data = xmltodict.parse(metaData)
