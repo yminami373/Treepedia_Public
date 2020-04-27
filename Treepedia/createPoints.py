@@ -105,6 +105,7 @@ if __name__ == "__main__":
     import os,os.path
     import sys
     
+    os.chdir("sample-spatialdata")
     root = os.getcwd()
     inshp = os.path.join(root,'CambridgeStreet_wgs84.shp')
     outshp = os.path.join(root,'Cambridge20m.shp')

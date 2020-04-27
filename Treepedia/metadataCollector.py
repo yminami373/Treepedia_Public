@@ -104,6 +104,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass,num,ouputTextFolder):
 if __name__ == "__main__":
     import os, os.path
     
+    os.chdir("sample-spatialdata")
     root = os.getcwd()
     inputShp = os.path.join(root,'Cambridge20m.shp')
     outputTxt = root
