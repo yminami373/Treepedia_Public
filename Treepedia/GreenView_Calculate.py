@@ -296,10 +296,14 @@ if __name__ == "__main__":
     import itertools
     
     
-    GSVinfoRoot = 'MYPATH//spatial-data/metadata'
-    outputTextPath = r'MYPATH//spatial-data/greenViewRes'
+    os.chdir("sample-spatialdata")
+    root = os.getcwd()
+    GSVinfoRoot = os.path.join(root, "metadata")
+    outputTextPath = os.path.join(root, "greenViewRes")
     greenmonth = ['01','02','03','04','05','06','07','08','09','10','11','12']
-    key_file = 'MYPATH/Treepedia/Treepedia/keys.txt'
+
+    os.chdir("../Treepedia")
+    key_file = os.path.join(os.getcwd(), 'keys.txt')
     
     GreenViewComputing_ogr_6Horizon(GSVinfoRoot,outputTextPath, greenmonth, key_file)
 
