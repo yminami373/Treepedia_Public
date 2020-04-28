@@ -69,7 +69,6 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, num):
                 geom.Transform(transform)
                 lon = geom.GetX()
                 lat = geom.GetY()
-                key = r'' #Input Your Key here 
                 
                 # get the meta data of panoramas 
                 urlAddress = r'http://maps.google.com/cbk?output=xml&ll=%s,%s'%(lat,lon)
