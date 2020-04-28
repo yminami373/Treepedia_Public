@@ -233,6 +233,8 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
                     panoDateLst.append(panoDate)
                     panoLonLst.append(lon)
                     panoLatLst.append(lat)
+
+            lines.close()
             
             # the output text file to store the green view and pano info
             gvTxt = 'GV_'+os.path.basename(txtfile)
