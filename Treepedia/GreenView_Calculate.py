@@ -197,7 +197,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
     
     # the input GSV info should be in a folder
     if not os.path.isdir(GSVinfoFolder):
-        print 'You should input a folder for GSV metadata'
+        print('You should input a folder for GSV metadata')
         return
     else:
         allTxtFiles = os.listdir(GSVinfoFolder)
