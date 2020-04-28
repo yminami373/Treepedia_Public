@@ -203,7 +203,6 @@ def CreatePointFeature_ogr(outputShapefile,LonLst,LatLst,panoIDlist,panoDateList
 ## ----------------- Main function ------------------------
 if __name__ == "__main__":
     import os
-    import sys
     
     os.chdir("sample-spatialdata")
     root = os.getcwd()
