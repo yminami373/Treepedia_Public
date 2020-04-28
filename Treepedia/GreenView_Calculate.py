@@ -240,8 +240,9 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
             
             
             # check whether the file already generated, if yes, skip. Therefore, you can run several process at same time using this code.
-            print(GreenViewTxtFile)
+            print("Processing", GreenViewTxtFile)
             if os.path.exists(GreenViewTxtFile):
+                print("File already exists")
                 continue
             
             # write the green view and pano info to txt            
