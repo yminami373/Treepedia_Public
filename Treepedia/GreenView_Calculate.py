@@ -179,6 +179,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
     for line in lines:
         key = line[:-1]
         keylist.append(key)
+    lines.close()
     
     print ('The key list is:=============', keylist)
     
