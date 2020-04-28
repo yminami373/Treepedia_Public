@@ -293,8 +293,6 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
 if __name__ == "__main__":
     
     import os,os.path
-    import itertools
-    
     
     os.chdir("sample-spatialdata")
     root = os.getcwd()
