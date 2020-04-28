@@ -5,3 +5,4 @@ matplotlib == 2.0.2
 shapely == 1.5.13
 fiona == 1.8.0
 pyproj == 2.6.0
+requests == 2.23.0
