@@ -27,10 +27,10 @@ def createPoints(inshp, outshp, mini_dist):
 
     import fiona
     import os,os.path
+    import pyproj
     from shapely.geometry import shape,mapping
     from shapely.ops import transform
     from functools import partial
-    import pyproj
     from fiona.crs import from_epsg
 
     count = 0
