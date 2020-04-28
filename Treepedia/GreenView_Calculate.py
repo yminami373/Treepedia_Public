@@ -30,10 +30,8 @@ def graythresh(array,level):
 #   in to byte and range from [0 255]
     if maxVal <= 1:
         array = array*255
-        # print "New max value is %s" %(np.max(array))
     elif maxVal >= 256:
         array = np.int((array - minVal)/(maxVal - minVal))
-        # print "New min value is %s" %(np.min(array))
     
     # turn the negative to natural number
     negIdx = np.where(array < 0)
@@ -222,9 +220,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
                 month = panoDate[-2:]
                 lon = metadata[5]
                 lat = metadata[7][:-1]
-                
-                # print (lon, lat, month, panoID, panoDate)
-                
+
                 # in case, the longitude and latitude are invalide
                 if len(lon)<3:
                     continue
