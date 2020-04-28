@@ -205,8 +205,11 @@ if __name__ == "__main__":
     import os
     import sys
     
-    inputGVIres = r'MYPATHH/spatial-data/greenViewRes'
-    outputShapefile = 'MYPATHH/spatial-data/GreenViewRes.shp'
+    os.chdir("sample-spatialdata")
+    root = os.getcwd()
+
+    inputGVIres = os.path.join(root, "greenViewRes")
+    outputShapefile = os.path.join(root, "GreenViewRes.shp")
     lyrname = 'greenView'
     [panoIDlist,panoDateList,LonLst,LatLst,greenViewList] = Read_GVI_res(inputGVIres)
     print ('The length of the panoIDList is:', len(panoIDlist))
