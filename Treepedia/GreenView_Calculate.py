@@ -155,7 +155,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
     This function is used to download the GSV from the information provide
     by the gsv info txt, and save the result to a shapefile
     
-    Required modules: StringIO, numpy, requests, and PIL
+    Required modules: io, numpy, requests, and PIL
     
         GSVinfoTxt: the input folder name of GSV info txt
         outTXTRoot: the output folder to store result green result in txt files
@@ -170,7 +170,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
     from PIL import Image
     import numpy as np
     import requests
-    from StringIO import StringIO
+    from io import StringIO
     
     
     # read the Google Street View API key files, you can also replace these keys by your own
