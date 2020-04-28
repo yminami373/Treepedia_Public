@@ -106,7 +106,7 @@ if __name__ == "__main__":
     os.chdir("sample-spatialdata")
     root = os.getcwd()
     inputShp = os.path.join(root,'Cambridge20m.shp')
-    outputTxt = root
+    outputTxt = os.path.join(root, "metadata")
     
     GSVpanoMetadataCollector(inputShp, outputTxt, num=1000)
 
