@@ -109,6 +109,7 @@ Using Otsu's method and the pymeanshift package, the Green View Index is compute
 </p>
 
 ```
+# after editing keys.txt and putting your Google Maps API keys inside
 python3 Treepedia/GreenView_Calculate.py
 ```
 
