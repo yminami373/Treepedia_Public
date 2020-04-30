@@ -51,6 +51,11 @@ brew install pkg-config freetype
 brew install gdal 
 pip3 install GDAL==$(gdal-config --version | awk -F'[.]' '{print $1"."$2}')
 
+# download PyMeanShift and install
+git clone https://github.com/fjean/pymeanshift.git
+cd pymeanshift
+sudo python setup.py install
+
 # move into repository and install remaining dependencies using pip
 cd Treepedia_Public
 pip3 install -r requirements.txt
