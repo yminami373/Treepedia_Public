@@ -32,7 +32,7 @@ The project has the following workflow:
 ## Step 0: Clone and install dependencies
 - Clone the repository by running the following.
 ```
-git clone https://github.com/mittrees/Treepedia_Public.git
+git clone https://github.com/y26805/Treepedia_Public.git
 ```
 - Create a virtual environment and activate it.
 ```
