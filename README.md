@@ -142,6 +142,7 @@ As a point of reference, the table below shows the number of requests and the as
 | Max. number of requests(*)                            | 108,540                     |
 | Total cost (USD)                                      | 748                         |
 | Cost, after applying $200 free credit (USD) (**)      | 548                         |
+
 *Note that this does not take into consideration the green season. This supposes that all points generated have requests sent to GSV. Each point requires six requests for calculating the index.
 **Free credit is applied per month, to each billing account.
 
