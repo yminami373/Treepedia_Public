@@ -177,7 +177,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
     lines = open(key_file,"r")
     keylist = []
     for line in lines:
-        key = line[:-1]
+        key = line.rstrip()
         keylist.append(key)
     lines.close()
     
