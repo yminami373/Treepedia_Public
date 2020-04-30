@@ -131,6 +131,9 @@ Detailed billing info can be found [here](https://developers.google.com/maps/doc
 
 As of April 2020, each Static Street View request (except for metadata) costs [0.007 USD per request](https://developers.google.com/maps/documentation/streetview/usage-and-billing#static-street-view), for the first 100,000 requests. Note that this excludes metadata, so Step 2 is not included. **Meanwhile, requests sent in Step 3 are billed.**
 
+You can monitor your API key usage using the Google Cloud Platform console.
+(APIs & Services -> Credentials -> API Keys)
+
 As a point of reference, the table below shows the number of requests and the associated cost ($548!!) for calculating the Green View Index of Cambridge, given the minimum distance (`mini_dist`) used is 20 m:
 
 | Item                                                  | Value                       |
@@ -148,7 +151,9 @@ As a point of reference, the table below shows the number of requests and the as
 *Note that this does not take into consideration the green season. This supposes that all points generated have requests sent to GSV. Each point requires six requests for calculating the index.
 **Free credit is applied per month, to each billing account.
 
-If `mini_dist` is increased to 100m, for example, number of points generated will drop to 4661 and the total cost will be $0 with free credit applied ($196 without free credit).
+If `mini_dist` is increased to 100m, for example, number of points generated will drop to 4661 (max. 27966 requests) and the total cost will be $0 with free credit applied ($196 without free credit).
+
+Finally, please note that [requests exceeding 25,000 requests per day require an API key and a digital signature](https://developers.google.com/maps/documentation/streetview/usage-and-billing#authenticating-requests). 
 
 # Contributors
 Project Co-Leads: Xiaojiang Li and Ian Seiferling
