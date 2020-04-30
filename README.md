@@ -14,7 +14,7 @@ If you are a government, researcher or stakeholder that has used this library to
 </p>
 
 # Pre-requisites
-- Python 3.
+- Python 3
   - You can check your python version by running the following in the Terminal.
 ```
 python3 --version
