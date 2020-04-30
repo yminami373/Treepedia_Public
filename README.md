@@ -10,7 +10,7 @@ If you are a government, researcher or stakeholder that has used this library to
 <br />
 
 <p align="center">
-  <img width="460" height="300" src="Treepedia_Public/blob/master/img.jpg">
+  <img width="460" height="300" src="images/img.jpg">
 </p>
 
 # Pre-requisites
@@ -63,11 +63,11 @@ pip3 install -r requirements.txt
 With the street network and boundary shapefile for your city as input, a shapefile containing points every 20m (which can be changed depending on the size of the city) will be generated to be fed into the Google API to retrieve Google Street View Images. 
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/ianseifs/Treepedia_Public/blob/master/images/img2.jpg">
+  <img width="460" height="300" src="images/img2.jpg">
 </p>
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/ianseifs/Treepedia_Public/blob/master/images/img1.jpg">
+  <img width="460" height="300" src="images/img1.jpg">
 </p>
 
 Note that spatial files must be in the projected WGS84 system.
@@ -86,7 +86,7 @@ In the [example code](https://github.com/y26805/Treepedia_Public/blob/cb806860ca
 With the shapefile as input, metadata containing the panoID, panoDate, latitude, longitude and tilt specifications for the image will be stored in textfiles to be later used to calculate the Green View Index. 
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/ianseifs/Treepedia_Public/blob/master/images/img3.jpg">
+  <img width="460" height="300" src="images/img3.jpg">
 </p>
 
 ```
@@ -105,7 +105,7 @@ You can generate your own sample sites based on the `createPoints.py` (Step 1) a
 Using Otsu's method and the pymeanshift package, the Green View Index is computed for all 6 images at each sampling point; for each sampling point the GVI values are then averaged to provide a single GVI value for every point along the street network. Finally, a shapefile will be generated containing all attributes, including the GVI, of the points on the street network. 
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/ianseifs/Treepedia_Public/blob/master/images/img4.jpg">
+  <img width="460" height="300" src="images/img4.jpg">
 </p>
 
 ```
