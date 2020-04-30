@@ -13,6 +13,18 @@ If you are a government, researcher or stakeholder that has used this library to
   <img width="460" height="300" src="https://github.com/ianseifs/Treepedia_Public/blob/master/img.jpg">
 </p>
 
+# Pre-requisites
+- Python 3
+You can check your python version by running the following in the Terminal.
+```
+python3 --version
+```
+
+- Homebrew, for Mac users. Installation guide [here](https://brew.sh)
+
+- Google Maps API key(s)
+
+
 # Workflow 
 
 The project has the following workflow:
