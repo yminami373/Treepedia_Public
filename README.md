@@ -32,7 +32,7 @@ The project has the following workflow:
 ## Step 0: Clone and install dependencies
 - Clone the repository by running the following.
 ```
-git clone https://github.com/y26805/Treepedia_Public.git
+git clone https://github.com/y26805/Treepedia_Public.gitg
 ```
 - Create a virtual environment and activate it.
 ```
@@ -70,7 +70,7 @@ Note that spatial files must be in the projected WGS84 system.
 python3 Treepedia/createPoints.py
 ```
 
-This function accepts three parameters: input shapefile name (`inoutShp`), output shapefile name (`outputShp`) and minimum distance (`mini_dist`).
+This function accepts three parameters: input shapefile name (`inputShp`), output shapefile name (`outputShp`) and minimum distance (`mini_dist`).
 
 In the [example code](https://github.com/y26805/Treepedia_Public/blob/cb806860ca85cf0a8db0805191153d4e3a93d446/Treepedia/createPoints.py#L109-L114), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output file is named `Cambridge20m.shp` and the minimum distance for sampling is set to `20` meters. 
 
