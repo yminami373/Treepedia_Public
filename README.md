@@ -25,7 +25,7 @@ python3 --version
 - Google Maps API key(s) with "Street View Static API" enabled
   - To create a billing account and enable the Street View API, please refer to the official guide [here](https://developers.google.com/maps/gmp-get-started)
   - To issue API keys, read [here](https://developers.google.com/maps/documentation/streetview/get-api-key)
-  - **IMPORTANT**: As API requests are billed beyond the free credit of $200 per month, please be careful with your API keys. Billing info can be found [here](https://developers.google.com/maps/documentation/streetview/usage-and-billing)
+  - **IMPORTANT**: As API requests are billed beyond the free credit of $200 per month, please be careful with your API keys. To find out more, refer to the section "Using the Google Maps API" below.
 
 
 # Workflow 
@@ -125,6 +125,12 @@ After finishing the computing, you can run the code of "Greenview2Shp.py" [here]
 ```
 python3 Treepedia/Greenview2Shp.py
 ```
+
+## Using the Google Maps API 
+Detailed billing info can be found [here](https://developers.google.com/maps/documentation/streetview/usage-and-billing).
+
+As of April 2020, each Static Street View request (except for metadata) costs [0.007 USD per request](https://developers.google.com/maps/documentation/streetview/usage-and-billing#static-street-view), for the first 100,000 requests. Note that this excludes metadata, so Step 2 is not included. **Meanwhile, requests sent in Step 3 are billed.**
+
 
 
 # Contributors
