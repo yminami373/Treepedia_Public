@@ -170,6 +170,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
     from PIL import Image
     import numpy as np
     import requests
+    import sys
     
     
     # read the Google Street View API key files, you can also replace these keys by your own
@@ -279,6 +280,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
 
                         # if the GSV images are not download successfully or failed to run, then return a null value
                         except:
+                            print("Unexpected error:", sys.exc_info()[0])
                             greenPercent = -1000
                             break
 
