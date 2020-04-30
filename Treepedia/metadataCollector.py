@@ -106,8 +106,8 @@ if __name__ == "__main__":
     os.chdir("sample-spatialdata")
     root = os.getcwd()
     inputShp = os.path.join(root,'Cambridge20m.shp')
-    outputTxt = os.path.join(root, "metadata")
+    outputTxtFolder = os.path.join(root, "metadata")
     batchNum = 1000
     
-    GSVpanoMetadataCollector(inputShp, outputTxt, batchNum)
+    GSVpanoMetadataCollector(inputShp, outputTxtFolder, batchNum)
 
