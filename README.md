@@ -29,6 +29,30 @@ python3 --version
 
 The project has the following workflow:
 
+## Step 0: Clone and install dependencies
+- Clone the repository by running the following.
+```
+git clone https://github.com/mittrees/Treepedia_Public.git
+```
+- Create a virtual environment and activate it.
+```
+python3 -m venv ~/.Treepedia_Public
+source ~/.Treepedia_Public/bin/activate
+```
+- Install dependencies.
+```
+# required for Matplotlib
+brew install pkg-config freetype 
+
+# required for Fiona
+brew install gdal 
+pip3 install GDAL==$(gdal-config --version | awk -F'[.]' '{print $1"."$2}')
+
+# move into repository and install remaining dependencies using pip
+cd Treepedia_Public
+pip3 install -r requirements.txt
+```
+
 ## Step 1: Point Sampling on Street Network of City 
 With the street network and boundary shapefile for your city as input, a shapefile containing points every 20m (which can be changed depending on the size of the city) will be generated to be fed into the Google API to retrieve Google Street View Images. 
 
