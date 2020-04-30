@@ -78,7 +78,7 @@ python3 Treepedia/createPoints.py
 
 This function accepts three parameters: input shapefile name (`inputShp`), output shapefile name (`outputShp`) and minimum distance (`mini_dist`).
 
-In the [example code](https://github.com/y26805/Treepedia_Public/blob/cb806860ca85cf0a8db0805191153d4e3a93d446/Treepedia/createPoints.py#L109-L114), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output file is named `Cambridge20m.shp` and the minimum distance for sampling is set to `20` meters. 
+In the [example code](Treepedia/createPoints.py#L109-L114), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output file is named `Cambridge20m.shp` and the minimum distance for sampling is set to `20` meters. 
 
 
 ## Step 2: Metadata containing GSV panoID's
@@ -95,7 +95,7 @@ python3 Treepedia/metadataCollector.py
 
 This function accepts three parameters: input shapefile name (`inputShp`), metadata output folder (`outputTxtFolder`) and batch size (`batchNum`).
 
-In the [example code](https://github.com/y26805/Treepedia_Public/blob/cb806860ca85cf0a8db0805191153d4e3a93d446/Treepedia/metadataCollector.py#L104-L111), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output folder is named `metadata` and the batch size is set to `1000`, which means the code will save metadata of every 1000 point to a txt file.
+In the [example code](Treepedia/metadataCollector.py#L104-L111), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output folder is named `metadata` and the batch size is set to `1000`, which means the code will save metadata of every 1000 point to a txt file.
 
 You can generate your own sample sites based on the `createPoints.py` (Step 1) and specify a different sample site file. 
 
@@ -114,13 +114,13 @@ python3 Treepedia/GreenView_Calculate.py
 
 This function accepts four parameters: input folder containing metadata (`GSVinfoRoot`), output folder path (`outputTxtPath`), a list of the green season `greenmonth` (for example, in Cambridge, the green months are May, June, July, August, and September) and key file (`key_file`).
 
-The [example code](https://github.com/y26805/Treepedia_Public/blob/cb806860ca85cf0a8db0805191153d4e3a93d446/Treepedia/GreenView_Calculate.py#L297-L310) is the collected metadata of GSV. By reading the metadata, this code will collect GSV images and segment the greenery, and calculate the green view index. Considering those GSV images captured in winter are leafless, which are not suitable for the analysis, you will need to specify the green season as `greenmonth` accordingly. 
+The [example code](Treepedia/GreenView_Calculate.py#L297-L310) is the collected metadata of GSV. By reading the metadata, this code will collect GSV images and segment the greenery, and calculate the green view index. Considering those GSV images captured in winter are leafless, which are not suitable for the analysis, you will need to specify the green season as `greenmonth` accordingly. 
 
 You can open several process to run this code simutaniously, because the output will be saved as txt files in folder. If the output txt file is already there, then the code will move to the next metadata txt file and generate the GVI for next 1000 points.
 
 ## Step 4: Convert output to shapefile (Optional)
 
-After finishing the computing, you can run the code of "Greenview2Shp.py" [here](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/Greenview2Shp.py), and save the result as shapefile, if you are more comfortable with shapefile.
+After finishing the computing, you can run the code of "Greenview2Shp.py" [here](Treepedia/Greenview2Shp.py), and save the result as shapefile, if you are more comfortable with shapefile.
 
 ```
 python3 Treepedia/Greenview2Shp.py
