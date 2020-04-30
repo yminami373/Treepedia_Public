@@ -15,7 +15,7 @@ If you are a government, researcher or stakeholder that has used this library to
 
 # Pre-requisites
 - Python 3.
-You can check your python version by running the following in the Terminal.
+  - You can check your python version by running the following in the Terminal.
 ```
 python3 --version
 ```
@@ -23,6 +23,7 @@ python3 --version
 - Homebrew, for Mac users. Installation guide [here](https://brew.sh)
 
 - Google Maps API key(s)
+  - Please refer to the official guide [here](https://developers.google.com/maps/gmp-get-started)
 
 
 # Workflow 
