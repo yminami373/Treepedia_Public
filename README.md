@@ -25,7 +25,7 @@ python3 --version
 - Google Maps API key(s) with "Street View Static API" enabled
   - To create a billing account and enable the Street View API, please refer to the official guide [here](https://developers.google.com/maps/gmp-get-started)
   - To issue API keys, read [here](https://developers.google.com/maps/documentation/streetview/get-api-key)
-  - **IMPORTANT**: As API requests are billed beyond the free credit of $200 per month, please be careful with your API keys. To find out more, refer to the section "Using the Google Maps API" below.
+  - **IMPORTANT**: As API requests are billed beyond the free credit of $200 per month (per billing account), please be careful with your API keys. To find out more, refer to the section "Using the Google Maps API" below.
 
 
 # Workflow 
@@ -131,7 +131,7 @@ Detailed billing info can be found [here](https://developers.google.com/maps/doc
 
 As of April 2020, each Static Street View request (except for metadata) costs [0.007 USD per request](https://developers.google.com/maps/documentation/streetview/usage-and-billing#static-street-view), for the first 100,000 requests. Note that this excludes metadata, so Step 2 is not included. **Meanwhile, requests sent in Step 3 are billed.**
 
-As a reference, here is a table showing the number of requests and the associated cost for calculating the Green View Index of Cambridge, given the minimum distance used is 20 m:
+As a point of reference, the table below shows the number of requests and the associated cost ($548!!) for calculating the Green View Index of Cambridge, given the minimum distance (`mini_dist`) used is 20 m:
 
 | Sample site                                           | Cambridge, Massachusetts    |
 | Area (km^2)                                           | 18.47                       |
@@ -141,8 +141,11 @@ As a reference, here is a table showing the number of requests and the associate
 | Number of points generated                            | 18,090                      |
 | Max. number of requests(*)                            | 108,540                     |
 | Total cost (USD)                                      | 748                         |
-| Cost, after applying $200 free credit (USD)           | 548                         |
-*Note that this does not take into consideration the green season. This supposes that all points generated have requests sent to GSV.
+| Cost, after applying $200 free credit (USD) (**)      | 548                         |
+*Note that this does not take into consideration the green season. This supposes that all points generated have requests sent to GSV. Each point requires six requests for calculating the index.
+**Free credit is applied per month, to each billing account.
+
+If `mini_dist` is increased to 100m, for example, number of points generated will drop to 4661 and the total cost will be $0 with free credit applied ($196 without free credit).
 
 # Contributors
 Project Co-Leads: Xiaojiang Li and Ian Seiferling
