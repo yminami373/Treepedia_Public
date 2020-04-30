@@ -133,6 +133,8 @@ As of April 2020, each Static Street View request (except for metadata) costs [0
 
 As a point of reference, the table below shows the number of requests and the associated cost ($548!!) for calculating the Green View Index of Cambridge, given the minimum distance (`mini_dist`) used is 20 m:
 
+| Item                                                  | Value                       |
+| ---                                                   | ---                         |
 | Sample site                                           | Cambridge, Massachusetts    |
 | Area (km^2)                                           | 18.47                       |
 | Shape file                                            | `CambridgeStreet_wgs84.shp` |
