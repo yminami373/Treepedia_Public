@@ -131,7 +131,18 @@ Detailed billing info can be found [here](https://developers.google.com/maps/doc
 
 As of April 2020, each Static Street View request (except for metadata) costs [0.007 USD per request](https://developers.google.com/maps/documentation/streetview/usage-and-billing#static-street-view), for the first 100,000 requests. Note that this excludes metadata, so Step 2 is not included. **Meanwhile, requests sent in Step 3 are billed.**
 
+As a reference, here is a table showing the number of requests and the associated cost for calculating the Green View Index of Cambridge, given the minimum distance used is 20 m:
 
+| Sample site                                           | Cambridge, Massachusetts    |
+| Area (km^2)                                           | 18.47                       |
+| Shape file                                            | `CambridgeStreet_wgs84.shp` |
+| Total length of links (in meters, sum of `shape_len`) | 820,000                     |
+| Minimum distance used in Step 1 (m)                   | 20                          |
+| Number of points generated                            | 18,090                      |
+| Max. number of requests(*)                            | 108,540                     |
+| Total cost (USD)                                      | 748                         |
+| Cost, after applying $200 free credit (USD)           | 548                         |
+*Note that this does not take into consideration the green season. This supposes that all points generated have requests sent to GSV.
 
 # Contributors
 Project Co-Leads: Xiaojiang Li and Ian Seiferling
