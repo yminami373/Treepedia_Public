@@ -22,6 +22,7 @@ def graythresh(array,level):
     '''
     
     import numpy as np
+    np.seterr(divide='ignore', invalid='ignore')
     
     maxVal = np.max(array)
     minVal = np.min(array)
