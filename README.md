@@ -112,9 +112,9 @@ Using Otsu's method and the pymeanshift package, the Green View Index is compute
 python3 Treepedia/GreenView_Calculate.py
 ```
 
-This function accepts four parameters: input folder containing metadata (`GSVinfoRoot`), output folder path (`outputTxtPath`), `greenmonth` and key file (`key_file`).
+This function accepts four parameters: input folder containing metadata (`GSVinfoRoot`), output folder path (`outputTxtPath`), a list of the green season `greenmonth` (for example, in Cambridge, the green months are May, June, July, August, and September) and key file (`key_file`).
 
-The [example code](https://github.com/y26805/Treepedia_Public/blob/cb806860ca85cf0a8db0805191153d4e3a93d446/Treepedia/GreenView_Calculate.py#L297-L310) is the collected metadata of GSV. By reading the metadata, this code will collect GSV images and segment the greenery, and calculate the green view index. Considering those GSV images captured in winter are leafless, which are not suitable for the analysis. You also need to specify the green season, for example, in Cambridge, the green months are May, June, July, August, and September.
+The [example code](https://github.com/y26805/Treepedia_Public/blob/cb806860ca85cf0a8db0805191153d4e3a93d446/Treepedia/GreenView_Calculate.py#L297-L310) is the collected metadata of GSV. By reading the metadata, this code will collect GSV images and segment the greenery, and calculate the green view index. Considering those GSV images captured in winter are leafless, which are not suitable for the analysis, you will need to specify the green season as `greenmonth` accordingly. 
 
 You can open several process to run this code simutaniously, because the output will be saved as txt files in folder. If the output txt file is already there, then the code will move to the next metadata txt file and generate the GVI for next 1000 points.
 
