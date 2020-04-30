@@ -70,7 +70,7 @@ Note that spatial files must be in the projected WGS84 system.
 python createPoints.py
 ```
 
-In the [example](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/createPoints.py), I use Cambridge as example. At the buttom of the code, you can specify the input shapefile of the street map, the minimum distance for sampling, and the number of the output shapefile for your cities.
+In the [example](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/createPoints.py), I use Cambridge as example. At the bottom of the code, you can specify the input shapefile of the street map, the minimum distance for sampling, and the number of the output shapefile for your cities.
 
 
 
@@ -86,7 +86,7 @@ With the shapefile as input, metadata containing the panoID, panoDate, latitude,
 python metadataCollector.py
 ```
 
-The input of this [code](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/metadataCollector.py) is created sample site shapefile. In the example, I use Cambridge20m.shp in the sample-spatialdata folder. You can generate your own sample sites based on the createPnt.py. At the buttom of the code, you can specify different sample site file. The batch size is 1000, which means the code will save metadata of every 1000 point to a txt file.
+The input of this [code](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/metadataCollector.py) is created sample site shapefile. In the example, I use Cambridge20m.shp in the sample-spatialdata folder. You can generate your own sample sites based on the `createPoints.py`. At the bottom of the code, you can specify different sample site file. The batch size is 1000, which means the code will save metadata of every 1000 point to a txt file.
 
 
 
@@ -101,7 +101,7 @@ Using Otsu's method and the pymeanshift package, the Green View Index is compute
 python GreenView_Calculate.py
 ```
 
-The input of this [code](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/GreenView_Calculate.py) is the collected metadata of GSV. By reading the metadat, this code will collect GSV images and segmente the greenery, and calculate the green view index. Considering those GSV images captured in winter are leafless, thiwh are not suitable for the analysis. You also need to specific the green season, for example, in Cambridge, the green months are May, June, July, August, and September.
+The input of this [code](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/GreenView_Calculate.py) is the collected metadata of GSV. By reading the metadata, this code will collect GSV images and segment the greenery, and calculate the green view index. Considering those GSV images captured in winter are leafless, which are not suitable for the analysis. You also need to specify the green season, for example, in Cambridge, the green months are May, June, July, August, and September.
 
 You can open several process to run this code simutaniously, because the output will be saved as txt files in folder. If the output txt file is already there, then the code will move to the next metadata txt file and generate the GVI for next 1000 points.
 
