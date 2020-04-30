@@ -33,10 +33,6 @@ python3 --version
 The project has the following workflow:
 
 ## Step 0: Clone and install dependencies
-- Clone the repository by running the following.
-```
-git clone https://github.com/y26805/Treepedia_Public.gitg
-```
 - Create a virtual environment and activate it.
 ```
 python3 -m venv ~/.Treepedia_Public
@@ -55,8 +51,10 @@ pip3 install GDAL==$(gdal-config --version | awk -F'[.]' '{print $1"."$2}')
 git clone https://github.com/fjean/pymeanshift.git
 cd pymeanshift
 sudo python setup.py install
+cd ../
 
-# move into repository and install remaining dependencies using pip
+# clone Treepedia repository and install remaining dependencies using pip
+git clone https://github.com/y26805/Treepedia_Public.git
 cd Treepedia_Public
 pip3 install -r requirements.txt
 ```
