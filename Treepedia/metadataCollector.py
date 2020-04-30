@@ -3,7 +3,7 @@
 
 # Copyright(C) Xiaojiang Li, Ian Seiferling, Marwa Abdulhai, Senseable City Lab, MIT 
 
-def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, num):
+def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
     '''
     This function is used to call the Google API url to collect the metadata of
     Google Street View Panoramas. The input of the function is the shpfile of the create sample site, the output
@@ -11,7 +11,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, num):
     
     Parameters: 
         samplesFeatureClass: the shapefile of the create sample sites
-        num: the number of sites proced every time. If batch size is 1000, the code will save metadata of every 1000 point to a txt file.
+        batchNum: the number of sites proced every time. If batch size is 1000, the code will save metadata of every 1000 point to a txt file.
         ouputTextFolder: the output folder for the panoinfo
         
     '''
@@ -40,12 +40,12 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, num):
     # loop all the features in the featureclass
     feature = layer.GetNextFeature()
     featureNum = layer.GetFeatureCount()
-    batch = math.ceil(featureNum/num)
+    batch = math.ceil(featureNum/batchNum)
     
     for b in range(batch):
         # for each batch process num GSV site
-        start = b*num
-        end = (b+1)*num
+        start = b*batchNum
+        end = (b+1)*batchNum
         if end > featureNum:
             end = featureNum
         
@@ -107,6 +107,7 @@ if __name__ == "__main__":
     root = os.getcwd()
     inputShp = os.path.join(root,'Cambridge20m.shp')
     outputTxt = os.path.join(root, "metadata")
+    batchNum = 1000
     
-    GSVpanoMetadataCollector(inputShp, outputTxt, num=1000)
+    GSVpanoMetadataCollector(inputShp, outputTxt, batchNum)
 
