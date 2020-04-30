@@ -88,16 +88,6 @@ You can open several process to run this code simutaniously, because the output 
 After finishing the computing, you can run the code of "Greenview2Shp.py" [here](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/Greenview2Shp.py), and save the result as shapefile, if you are more comfortable with shapefile.
 
 
-# Dependencies
-  * Pyshiftmean package
-  * Numpy
-  * GDAL
-  * PIL
-  * Shapely
-  * Fiona
-  * xmltodict 
-  * Python (2.7)
-
 # Contributors
 Project Co-Leads: Xiaojiang Li and Ian Seiferling
 
