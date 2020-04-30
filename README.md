@@ -105,7 +105,13 @@ The input of this [code](https://github.com/ianseifs/Treepedia_Public/blob/maste
 
 You can open several process to run this code simutaniously, because the output will be saved as txt files in folder. If the output txt file is already there, then the code will move to the next metadata txt file and generate the GVI for next 1000 points.
 
+## Step 4: Convert output to shapefile (Optional)
+
 After finishing the computing, you can run the code of "Greenview2Shp.py" [here](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/Greenview2Shp.py), and save the result as shapefile, if you are more comfortable with shapefile.
+
+```
+python Greenview2Shp.py
+```
 
 
 # Contributors
