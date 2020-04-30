@@ -70,9 +70,9 @@ Note that spatial files must be in the projected WGS84 system.
 python3 createPoints.py
 ```
 
-In the [example](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/createPoints.py), I use Cambridge as example. At the bottom of the code, you can specify the input shapefile of the street map, the minimum distance for sampling, and the number of the output shapefile for your cities.
+In the [example code](https://github.com/y26805/Treepedia_Public/blob/cb806860ca85cf0a8db0805191153d4e3a93d446/Treepedia/createPoints.py#L109-L114), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output file is named `Cambridge20m.shp` and the minimum distance for sampling is set to `20` meters. 
 
-
+You can modify the folder name, input shapefile name (`inshp`), output shapefile name (`outshp`) and minimum distance (`mini_dist`) as necessary.
 
 ## Step 2: Metadata containing GSV panoID's
 
