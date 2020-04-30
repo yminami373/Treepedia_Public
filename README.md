@@ -70,9 +70,10 @@ Note that spatial files must be in the projected WGS84 system.
 python3 createPoints.py
 ```
 
+This function accepts three parameters: input shapefile name (`inoutShp`), output shapefile name (`outputShp`) and minimum distance (`mini_dist`).
+
 In the [example code](https://github.com/y26805/Treepedia_Public/blob/cb806860ca85cf0a8db0805191153d4e3a93d446/Treepedia/createPoints.py#L109-L114), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output file is named `Cambridge20m.shp` and the minimum distance for sampling is set to `20` meters. 
 
-You can modify the folder name, input shapefile name (`inshp`), output shapefile name (`outshp`) and minimum distance (`mini_dist`) as necessary.
 
 ## Step 2: Metadata containing GSV panoID's
 
@@ -86,7 +87,11 @@ With the shapefile as input, metadata containing the panoID, panoDate, latitude,
 python3 metadataCollector.py
 ```
 
-The input of this [code](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/metadataCollector.py) is created sample site shapefile. In the example, I use Cambridge20m.shp in the sample-spatialdata folder. You can generate your own sample sites based on the `createPoints.py`. At the bottom of the code, you can specify different sample site file. The batch size is 1000, which means the code will save metadata of every 1000 point to a txt file.
+This function accepts three parameters: input shapefile name (`inputShp`), metadata output folder (`outputTxtFolder`) and batch size (`batchNum`).
+
+In the [example code](https://github.com/y26805/Treepedia_Public/blob/cb806860ca85cf0a8db0805191153d4e3a93d446/Treepedia/metadataCollector.py#L104-L111), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output folder is named `metadata` and the batch size is set to `1000`, which means the code will save metadata of every 1000 point to a txt file.
+
+You can generate your own sample sites based on the `createPoints.py` (Step 1) and specify a different sample site file. 
 
 
 
@@ -101,7 +106,9 @@ Using Otsu's method and the pymeanshift package, the Green View Index is compute
 python3 GreenView_Calculate.py
 ```
 
-The input of this [code](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/GreenView_Calculate.py) is the collected metadata of GSV. By reading the metadata, this code will collect GSV images and segment the greenery, and calculate the green view index. Considering those GSV images captured in winter are leafless, which are not suitable for the analysis. You also need to specify the green season, for example, in Cambridge, the green months are May, June, July, August, and September.
+This function accepts four parameters: input folder containing metadata (`GSVinfoRoot`), output folder path (`outputTxtPath`), `greenmonth` and key file (`key_file`).
+
+The [example code](https://github.com/y26805/Treepedia_Public/blob/cb806860ca85cf0a8db0805191153d4e3a93d446/Treepedia/GreenView_Calculate.py#L297-L310) is the collected metadata of GSV. By reading the metadata, this code will collect GSV images and segment the greenery, and calculate the green view index. Considering those GSV images captured in winter are leafless, which are not suitable for the analysis. You also need to specify the green season, for example, in Cambridge, the green months are May, June, July, August, and September.
 
 You can open several process to run this code simutaniously, because the output will be saved as txt files in folder. If the output txt file is already there, then the code will move to the next metadata txt file and generate the GVI for next 1000 points.
 
