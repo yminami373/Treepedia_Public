@@ -155,7 +155,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
     This function is used to download the GSV from the information provide
     by the gsv info txt, and save the result to a shapefile
     
-    Required modules: io, numpy, requests, and PIL
+    Required modules: numpy, requests, and PIL
     
         GSVinfoTxt: the input folder name of GSV info txt
         outTXTRoot: the output folder to store result green result in txt files
@@ -170,7 +170,6 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
     from PIL import Image
     import numpy as np
     import requests
-    from io import StringIO
     
     
     # read the Google Street View API key files, you can also replace these keys by your own
@@ -273,8 +272,8 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
                         
                         # classify the GSV images and calcuate the GVI
                         try:
-                            response = requests.get(URL)
-                            im = np.array(Image.open(StringIO(response.content)))
+                            response = requests.get(URL, stream=True)
+                            im = np.array(Image.open(response.raw))
                             percent = VegetationClassification(im)
                             greenPercent = greenPercent + percent
 
