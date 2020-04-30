@@ -10,7 +10,7 @@ If you are a government, researcher or stakeholder that has used this library to
 <br />
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/ianseifs/Treepedia_Public/blob/master/img.jpg">
+  <img width="460" height="300" src="Treepedia_Public/blob/master/img.jpg">
 </p>
 
 # Pre-requisites
@@ -25,7 +25,7 @@ python3 --version
 - Google Maps API key(s) with "Street View Static API" enabled
   - To create a billing account and enable the Street View API, please refer to the official guide [here](https://developers.google.com/maps/gmp-get-started)
   - To issue API keys, read [here](https://developers.google.com/maps/documentation/streetview/get-api-key)
-  - **IMPORTANT**: As API requests are billed beyond the free credit of $200 per month (per billing account), please be careful with your API keys. To find out more, refer to the section "Using the Google Maps API" below.
+  - **IMPORTANT**: As API requests are billed beyond the free credit of $200 per month (per billing account), please be careful with your API keys. To find out more, refer to the section ["Using the Google Maps API"](#using-the-google-maps-api).
 
 
 # Workflow 
