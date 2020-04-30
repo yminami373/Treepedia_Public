@@ -67,7 +67,7 @@ With the street network and boundary shapefile for your city as input, a shapefi
 Note that spatial files must be in the projected WGS84 system.
 
 ```
-python3 createPoints.py
+python3 Treepedia/createPoints.py
 ```
 
 This function accepts three parameters: input shapefile name (`inoutShp`), output shapefile name (`outputShp`) and minimum distance (`mini_dist`).
@@ -84,7 +84,7 @@ With the shapefile as input, metadata containing the panoID, panoDate, latitude,
 </p>
 
 ```
-python3 metadataCollector.py
+python3 Treepedia/metadataCollector.py
 ```
 
 This function accepts three parameters: input shapefile name (`inputShp`), metadata output folder (`outputTxtFolder`) and batch size (`batchNum`).
@@ -103,7 +103,7 @@ Using Otsu's method and the pymeanshift package, the Green View Index is compute
 </p>
 
 ```
-python3 GreenView_Calculate.py
+python3 Treepedia/GreenView_Calculate.py
 ```
 
 This function accepts four parameters: input folder containing metadata (`GSVinfoRoot`), output folder path (`outputTxtPath`), `greenmonth` and key file (`key_file`).
@@ -117,7 +117,7 @@ You can open several process to run this code simutaniously, because the output 
 After finishing the computing, you can run the code of "Greenview2Shp.py" [here](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/Greenview2Shp.py), and save the result as shapefile, if you are more comfortable with shapefile.
 
 ```
-python3 Greenview2Shp.py
+python3 Treepedia/Greenview2Shp.py
 ```
 
 
