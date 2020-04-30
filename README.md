@@ -67,7 +67,7 @@ With the street network and boundary shapefile for your city as input, a shapefi
 Note that spatial files must be in the projected WGS84 system.
 
 ```
-python createPoints.py
+python3 createPoints.py
 ```
 
 In the [example](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/createPoints.py), I use Cambridge as example. At the bottom of the code, you can specify the input shapefile of the street map, the minimum distance for sampling, and the number of the output shapefile for your cities.
@@ -83,7 +83,7 @@ With the shapefile as input, metadata containing the panoID, panoDate, latitude,
 </p>
 
 ```
-python metadataCollector.py
+python3 metadataCollector.py
 ```
 
 The input of this [code](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/metadataCollector.py) is created sample site shapefile. In the example, I use Cambridge20m.shp in the sample-spatialdata folder. You can generate your own sample sites based on the `createPoints.py`. At the bottom of the code, you can specify different sample site file. The batch size is 1000, which means the code will save metadata of every 1000 point to a txt file.
@@ -98,7 +98,7 @@ Using Otsu's method and the pymeanshift package, the Green View Index is compute
 </p>
 
 ```
-python GreenView_Calculate.py
+python3 GreenView_Calculate.py
 ```
 
 The input of this [code](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/GreenView_Calculate.py) is the collected metadata of GSV. By reading the metadata, this code will collect GSV images and segment the greenery, and calculate the green view index. Considering those GSV images captured in winter are leafless, which are not suitable for the analysis. You also need to specify the green season, for example, in Cambridge, the green months are May, June, July, August, and September.
@@ -110,7 +110,7 @@ You can open several process to run this code simutaniously, because the output 
 After finishing the computing, you can run the code of "Greenview2Shp.py" [here](https://github.com/ianseifs/Treepedia_Public/blob/master/Treepedia/Greenview2Shp.py), and save the result as shapefile, if you are more comfortable with shapefile.
 
 ```
-python Greenview2Shp.py
+python3 Greenview2Shp.py
 ```
 
 
