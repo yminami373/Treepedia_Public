@@ -126,7 +126,7 @@ After finishing the computing, you can run the code of "Greenview2Shp.py" [here]
 python3 Treepedia/Greenview2Shp.py
 ```
 
-## Using the Google Maps API 
+# Using the Google Maps API 
 Detailed billing info can be found [here](https://developers.google.com/maps/documentation/streetview/usage-and-billing).
 
 As of April 2020, each Static Street View request (except for metadata) costs [0.007 USD per request](https://developers.google.com/maps/documentation/streetview/usage-and-billing#static-street-view), for the first 100,000 requests. Note that this excludes metadata, so Step 2 is not included. **Meanwhile, requests sent in Step 3 are billed.**
