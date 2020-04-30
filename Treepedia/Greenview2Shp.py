@@ -55,6 +55,7 @@ def Read_GSVinfo_Text(GVI_Res_txt):
             panoLonLst.append(lon)
             panoLatLst.append(lat)
             greenViewLst.append(greenView)
+    lines.close()
 
     return panoIDLst,panoDateLst,panoLonLst,panoLatLst,greenViewLst
 
