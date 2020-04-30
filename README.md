@@ -22,8 +22,9 @@ python3 --version
 
 - Homebrew, for Mac users. Installation guide [here](https://brew.sh)
 
-- Google Maps API key(s)
-  - Please refer to the official guide [here](https://developers.google.com/maps/gmp-get-started)
+- Google Maps API key(s) with "Street View Static API" enabled
+  - To create a billing account and enable the Street View API, please refer to the official guide [here](https://developers.google.com/maps/gmp-get-started)
+  - To issue API keys, read [here](https://developers.google.com/maps/documentation/streetview/get-api-key)
 
 
 # Workflow 
