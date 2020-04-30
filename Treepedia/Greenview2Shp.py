@@ -45,7 +45,6 @@ def Read_GSVinfo_Text(GVI_Res_txt):
             continue
         
         elif float(greenView) < 0:
-            print(greenView)
             continue
         
         # remove the duplicated panorama id
