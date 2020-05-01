@@ -18,7 +18,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
     
     import urllib
     import xmltodict
-    import ogr, osr
+    from osgeo import ogr, osr
     import time
     import os,os.path
     import math
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     os.chdir("sample-spatialdata")
     root = os.getcwd()
     inputShp = os.path.join(root,'Cambridge20m.shp')
-    outputTxtFolder = os.path.join(root, "metadata")
+    outputTxtFolder = os.path.join(root, "metadata_test")
     batchNum = 1000
     
     GSVpanoMetadataCollector(inputShp, outputTxtFolder, batchNum)
