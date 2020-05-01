@@ -18,7 +18,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
     
     import urllib
     import xmltodict
-    from osgeo import ogr, osr
+    from osgeo import ogr, osr, gdal
     import time
     import os,os.path
     import math
@@ -38,6 +38,11 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
     sourceProj = layer.GetSpatialRef()
     targetProj = osr.SpatialReference()
     targetProj.ImportFromEPSG(4326) # change the projection of shapefile to the WGS84
+
+    # if GDAL version is 3.0 or above
+    if gdal.__version__.startswith('2.') is False:
+        targetProj.SetAxisMappingStrategy(osr.OAMS_TRADITIONAL_GIS_ORDER)
+        
     transform = osr.CoordinateTransformation(sourceProj, targetProj)
     
     # loop all the features in the featureclass
