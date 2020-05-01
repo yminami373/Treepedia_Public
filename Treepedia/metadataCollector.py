@@ -32,6 +32,10 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
     
     # change the projection of shapefile to the WGS84
     dataset = driver.Open(samplesFeatureClass)
+
+    if dataset is None:
+        print('Could not open %s' % (samplesFeatureClass))
+
     layer = dataset.GetLayer()
     
     sourceProj = layer.GetSpatialRef()
