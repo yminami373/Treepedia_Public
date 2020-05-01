@@ -73,12 +73,13 @@ With the street network and boundary shapefile for your city as input, a shapefi
 Note that spatial files must be in the projected WGS84 system.
 
 ```
+# after changing relevant parameters in Lines 105-114
 python3 Treepedia/createPoints.py
 ```
 
 This function accepts three parameters: input shapefile name (`inputShp`), output shapefile name (`outputShp`) and minimum distance (`mini_dist`).
 
-In the [example code](Treepedia/createPoints.py#L109-L114), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output file is named `Cambridge20m.shp` and the minimum distance for sampling is set to `20` meters. 
+In the [example code](Treepedia/createPoints.py#L105-L114), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output file is named `Cambridge20m.shp` and the minimum distance for sampling is set to `20` meters. 
 
 
 ## Step 2: Metadata containing GSV panoID's
@@ -90,12 +91,13 @@ With the shapefile as input, metadata containing the panoID, panoDate, latitude,
 </p>
 
 ```
+# after changing relevant parameters in Lines 110-120
 python3 Treepedia/metadataCollector.py
 ```
 
 This function accepts three parameters: input shapefile name (`inputShp`), metadata output folder (`outputTxtFolder`) and batch size (`batchNum`).
 
-In the [example code](Treepedia/metadataCollector.py#L104-L111), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output folder is named `metadata` and the batch size is set to `1000`, which means the code will save metadata of every 1000 point to a txt file.
+In the [example code](Treepedia/metadataCollector.py#L110-L120), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output folder is named `metadata` and the batch size is set to `1000`, which means the code will save metadata of every 1000 point to a txt file.
 
 You can generate your own sample sites based on the `createPoints.py` (Step 1) and specify a different sample site file. 
 
@@ -109,7 +111,9 @@ Using Otsu's method and the pymeanshift package, the Green View Index is compute
 </p>
 
 ```
+# after changing relevant parameters in Lines 297-310
 # after editing keys.txt and putting your Google Maps API keys inside
+
 python3 Treepedia/GreenView_Calculate.py
 ```
 
@@ -124,6 +128,7 @@ You can open several process to run this code simutaniously, because the output 
 After finishing the computing, you can run the code of "Greenview2Shp.py" [here](Treepedia/Greenview2Shp.py), and save the result as shapefile, if you are more comfortable with shapefile.
 
 ```
+# after changing relevant parameters in Lines 204-218
 python3 Treepedia/Greenview2Shp.py
 ```
 
