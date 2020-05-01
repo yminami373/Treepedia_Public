@@ -27,6 +27,8 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
         os.makedirs(ouputTextFolder)
     
     driver = ogr.GetDriverByName('ESRI Shapefile')
+    if driver is None:
+        print('Driver is not available.')
     
     # change the projection of shapefile to the WGS84
     dataset = driver.Open(samplesFeatureClass)
