@@ -47,7 +47,10 @@ brew install pkg-config freetype
 brew install gdal 
 pip3 install GDAL==$(gdal-config --version | awk -F'[.]' '{print $1"."$2}')
 
-# download PyMeanShift and install
+# install dependency of PyMeanShift
+pip3 install numpy==1.18.3
+
+# download PyMeanShift (not available on PIP) and install
 git clone https://github.com/fjean/pymeanshift.git
 cd pymeanshift
 sudo python setup.py install
