@@ -36,6 +36,7 @@ After setting budgets and alerts, we can take a further step to disable billing 
     - Project: (Select the project for which you have created the Street View Static API key)
     - Select a Cloud Pub/Sub topic: Click and select "Create a topic". Set Topic ID to `stop-billing` and click "Create topic".
 8. Click "Save".
+
 *Note: As there is latency between incurring costs and receiving budget notifications, it is advisable to set the target amount to an amount slightly lower than the free credit amount (i.e. USD200).
 
 You will receive email notifications when 50%, 90%, and 100% of your budget has been exceeded. (You can customise the thresholds.) This will keep you informed of your API usage and any suspicious activity (e.g. leakage of API key).
