@@ -162,7 +162,7 @@ As a point of reference, the table below shows the number of requests and the as
 
 If `mini_dist` is increased to 100m, for example, number of points generated will drop to 4661 (max. 27966 requests) and the total cost will be $0 with free credit applied ($196 without free credit).
 
-Finally, please note that [requests exceeding 25,000 requests per day require an API key and a digital signature](https://developers.google.com/maps/documentation/streetview/usage-and-billing#authenticating-requests). 
+To disable billing beyond free credit usage, refer to [this doc](./google-maps-api-billing.md).
 
 # Contributors
 Project Co-Leads: Xiaojiang Li and Ian Seiferling
