@@ -128,7 +128,7 @@ const _disableBillingForProject = async (projectName) => {
 };
 ```
  
-7. Change Function to executive to `stopBilling`.
+7. Change Function to execute to `stopBilling`.
 8. Click "Create".
 9. As your cloud function is being created, click on it to view details.
 10. Note the email address under Service Account. It should look something like `project-name@appspot.gserviceaccount.com`.
