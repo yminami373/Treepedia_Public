@@ -136,7 +136,7 @@ const _disableBillingForProject = async (projectName) => {
 ## Step 3: Granting billing permissions to Service Account
 1. On Cloud console, go to Billing > Account Management.
 2. Under Permissions panel, click Add members. If Permissions panel is not shown, click "Show info panel" on the page.
-3. In the New Members field, entered the email address you have noted (e.g. `project-name@appspot.gserviceaccount.com`).
+3. In the New Members field, enter the email address you have noted (e.g. `project-name@appspot.gserviceaccount.com`).
 4. Set Role to `Billing Account Administrator`.
 5. Click Save.
 
