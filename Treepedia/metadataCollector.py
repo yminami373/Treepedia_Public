@@ -80,7 +80,6 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
                 
                 # get the meta data of panoramas 
                 urlAddress = r'http://maps.google.com/cbk?output=xml&ll=%s,%s'%(lat,lon)
-                urlAddress = "http://maps.google.com/cbk?output=xml&ll=35.66957,139.70297"
                 
                 time.sleep(0.05)
                 # the output result of the meta data is a xml object
