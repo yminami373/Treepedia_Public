@@ -93,7 +93,6 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
                     continue
                 else:
                     panoInfo = data['panorama']['data_properties']   
-                    print(panoInfo)    
                     panoDate, panoId, panoLat, panoLon = getPanoItems(panoInfo)
                     
                     print('The coordinate (%s,%s), panoId is: %s, panoDate is: %s'%(panoLon,panoLat,panoId, panoDate))
