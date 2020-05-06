@@ -80,6 +80,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
                 
                 # get the meta data of panoramas 
                 urlAddress = r'http://maps.google.com/cbk?output=xml&ll=%s,%s'%(lat,lon)
+                urlAddress = "http://maps.google.com/cbk?output=xml&ll=35.66957,139.70297"
                 
                 time.sleep(0.05)
                 # the output result of the meta data is a xml object
@@ -92,7 +93,8 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
                 if data['panorama']==None:
                     continue
                 else:
-                    panoInfo = data['panorama']['data_properties']       
+                    panoInfo = data['panorama']['data_properties']   
+                    print(panoInfo)    
                     panoDate, panoId, panoLat, panoLon = getPanoItems(panoInfo)
                     
                     print('The coordinate (%s,%s), panoId is: %s, panoDate is: %s'%(panoLon,panoLat,panoId, panoDate))
@@ -101,12 +103,13 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
                     
         panoInfoText.close()
 
+
 def getPanoItems(panoInfo):
     # get the meta data of the panorama
-    panoDate = list(panoInfo.items())[4][1]
-    panoId = list(panoInfo.items())[5][1]
-    panoLat = list(panoInfo.items())[8][1]
-    panoLon = list(panoInfo.items())[9][1]
+    panoDate = panoInfo['@image_date']
+    panoId = panoInfo['@pano_id']
+    panoLat = panoInfo['@lat']
+    panoLon = panoInfo['@lng']
     return panoDate, panoId, panoLat, panoLon
 
 
