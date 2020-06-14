@@ -311,6 +311,8 @@ def get_pano_lists_from_file(txtfilename, greenmonth):
         # only use the months of green seasons
         if month not in greenmonth:
             continue
+        if panoID in panoIDLst:
+            continue
         else:
             panoIDLst.append(panoID)
             panoDateLst.append(panoDate)
