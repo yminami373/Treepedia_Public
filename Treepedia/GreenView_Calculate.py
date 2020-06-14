@@ -14,6 +14,13 @@
 
 # Copyright(C) Xiaojiang Li, Ian Seiferling, Marwa Abdulhai, Senseable City Lab, MIT 
 # First version June 18, 2014
+
+import time
+from PIL import Image
+import numpy as np
+import requests
+import sys
+    
 def graythresh(array,level):
     '''array: is the numpy array waiting for processing
     return thresh: is the result got by OTSU algorithm
@@ -166,13 +173,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
     last modified by Xiaojiang Li, MIT Senseable City Lab, March 25, 2018
     
     """
-    
-    import time
-    from PIL import Image
-    import numpy as np
-    import requests
-    import sys
-    
+
     
     # read the Google Street View API key files, you can also replace these keys by your own
     lines = open(key_file,"r")
@@ -274,8 +275,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
                         
                         # classify the GSV images and calcuate the GVI
                         try:
-                            response = requests.get(URL, stream=True)
-                            im = np.array(Image.open(response.raw))
+                            im = get_api_image(URL)
                             percent = VegetationClassification(im)
                             greenPercent = greenPercent + percent
 
@@ -292,6 +292,12 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
                     # write the result and the pano info to the result txt file
                     lineTxt = 'panoID: %s panoDate: %s longitude: %s latitude: %s, greenview: %s\n'%(panoID, panoDate, lon, lat, greenViewVal)
                     gvResTxt.write(lineTxt)
+
+
+def get_api_image(url):
+    response = requests.get(url, stream=True)
+    im = np.array(Image.open(response.raw))
+    return im
 
 
 # ------------------------------Main function-------------------------------
