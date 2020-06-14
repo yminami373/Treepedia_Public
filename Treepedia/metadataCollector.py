@@ -3,7 +3,7 @@
 
 # Copyright(C) Xiaojiang Li, Ian Seiferling, Marwa Abdulhai, Senseable City Lab, MIT 
 
-def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
+def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum, greenmonth):
     '''
     This function is used to call the Google API url to collect the metadata of
     Google Street View Panoramas. The input of the function is the shpfile of the create sample site, the output
@@ -13,6 +13,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
         samplesFeatureClass: the shapefile of the create sample sites
         batchNum: the number of sites proced every time. If batch size is 1000, the code will save metadata of every 1000 point to a txt file.
         ouputTextFolder: the output folder for the panoinfo
+        greenmonth: a list of the green season, for example in Boston, greenmonth = ['05','06','07','08','09']
         
     '''
     
@@ -94,6 +95,8 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum):
                 else:
                     panoInfo = data['panorama']['data_properties']   
                     panoDate, panoId, panoLat, panoLon = getPanoItems(panoInfo)
+
+                    print(f"{panoID} in green month?", check_pano_month_in_greenmonth(panoDate, greenmonth))
                     
                     print('The coordinate (%s,%s), panoId is: %s, panoDate is: %s'%(panoLon,panoLat,panoId, panoDate))
                     lineTxt = 'panoID: %s panoDate: %s longitude: %s latitude: %s\n'%(panoId, panoDate, panoLon, panoLat)
@@ -111,15 +114,21 @@ def getPanoItems(panoInfo):
     return panoDate, panoId, panoLat, panoLon
 
 
+def check_pano_month_in_greenmonth(panoDate, greenmonth):
+    month = panoDate[-2:]
+    return month in greenmonth
+
+
 # ------------Main Function -------------------    
 if __name__ == "__main__":
     import os, os.path
-    
+
     os.chdir("sample-spatialdata")
     root = os.getcwd()
     inputShp = os.path.join(root,'Cambridge20m.shp')
     outputTxtFolder = os.path.join(root, "metadata")
     batchNum = 1000
     
-    GSVpanoMetadataCollector(inputShp, outputTxtFolder, batchNum)
+    greenmonth = ['01','02','03','04','05','06','07','08','09','10','11','12']
+    GSVpanoMetadataCollector(inputShp, outputTxtFolder, batchNum, greenmonth)
 

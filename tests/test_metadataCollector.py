@@ -39,5 +39,16 @@ class TestMetadataCollector(unittest.TestCase):
         self.assertEqual(panoLon, '139.702947')
 
 
+    def test_check_pano_month_in_greenmonth(self):
+        # case 1, in greenmonth
+        greenmonth = ["08"]
+        panoDate1 = "2019-08"
+       self.assertEqual(True, metadataCollector.check_pano_month_in_greenmonth(panoDate1, greenmonth))
+
+        # case 2, not in greenmonth
+        panoDate2 = "2019-07"
+        self.assertEqual(False, metadataCollector.check_pano_month_in_greenmonth(panoDate2, greenmonth))
+
+
 if __name__ == '__main__':
     unittest.main()
