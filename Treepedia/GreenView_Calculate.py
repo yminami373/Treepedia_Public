@@ -208,37 +208,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
                 continue
             
             txtfilename = os.path.join(GSVinfoFolder,txtfile)
-            lines = open(txtfilename,"r")
-            
-            # create empty lists, to store the information of panos,and remove duplicates
-            panoIDLst = []
-            panoDateLst = []
-            panoLonLst = []
-            panoLatLst = []
-            
-            # loop all lines in the txt files
-            for line in lines:
-                metadata = line.split(" ")
-                panoID = metadata[1]
-                panoDate = metadata[3]
-                month = panoDate[-2:]
-                lon = metadata[5]
-                lat = metadata[7][:-1]
-
-                # in case, the longitude and latitude are invalide
-                if len(lon)<3:
-                    continue
-                
-                # only use the months of green seasons
-                if month not in greenmonth:
-                    continue
-                else:
-                    panoIDLst.append(panoID)
-                    panoDateLst.append(panoDate)
-                    panoLonLst.append(lon)
-                    panoLatLst.append(lat)
-
-            lines.close()
+            panoIDLst, panoDateLst, panoLonLst, panoLatLst = get_pano_lists_from_file(txtfilename)
             
             # the output text file to store the green view and pano info
             gvTxt = 'GV_'+os.path.basename(txtfile)
@@ -314,6 +284,42 @@ def get_api_image(url):
     response = requests.get(url, stream=True)
     im = np.array(Image.open(response.raw))
     return im
+
+
+def get_pano_lists_from_file(txtfilename):
+    lines = open(txtfilename,"r")
+
+    # create empty lists, to store the information of panos,and remove duplicates
+    panoIDLst = []
+    panoDateLst = []
+    panoLonLst = []
+    panoLatLst = []
+    
+    # loop all lines in the txt files
+    for line in lines:
+        metadata = line.split(" ")
+        panoID = metadata[1]
+        panoDate = metadata[3]
+        month = panoDate[-2:]
+        lon = metadata[5]
+        lat = metadata[7][:-1]
+
+        # in case, the longitude and latitude are invalide
+        if len(lon)<3:
+            continue
+        
+        # only use the months of green seasons
+        if month not in greenmonth:
+            continue
+        else:
+            panoIDLst.append(panoID)
+            panoDateLst.append(panoDate)
+            panoLonLst.append(lon)
+            panoLatLst.append(lat)
+
+    lines.close()
+
+    return panoIDLst, panoDateLst, panoLonLst, panoLatLst
 
 
 # ------------------------------Main function-------------------------------
