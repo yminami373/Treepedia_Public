@@ -281,7 +281,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
 
                         # if the GSV images are not download successfully or failed to run, then return a null value
                         except:
-                            print("Unexpected error:", sys.exc_info()[0])
+                            print("Unexpected error:", sys.exc_info())
                             greenPercent = -1000
                             break
 
