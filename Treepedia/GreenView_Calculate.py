@@ -20,6 +20,7 @@ from PIL import Image
 import numpy as np
 import requests
 import sys
+from urllib.parse import urlencode
     
 def graythresh(array,level):
     '''array: is the numpy array waiting for processing
@@ -295,7 +296,16 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
 
 
 def get_api_url(panoID, heading, pitch, key):
-    URL = "http://maps.googleapis.com/maps/api/streetview?size=400x400&pano=%s&fov=60&heading=%d&pitch=%d&sensor=false&key=%s"%(panoID, heading, pitch, key)
+    params = {
+        "size": "400x400",
+        "pano": panoID,
+        "fov": 60,
+        "heading": heading,
+        "pitch": pitch,
+        "sensor": "false",
+        "key": key
+    }
+    URL = "http://maps.googleapis.com/maps/api/streetview?" + urlencode(params)
     return URL
 
 
