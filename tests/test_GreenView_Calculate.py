@@ -17,6 +17,20 @@ class TestGreenViewCalculate(unittest.TestCase):
 
         self.assertEqual(actual_url, expected_url)
 
+    def test_get_pano_lists_from_file(self):
+        panoIDLst = ["PEMVMfgReaRew_JEsfG9jQ", "N0UDB9H2pkgSptkkhBU7iw"]
+        panoDateLst = ["2019-08", "2019-08"]
+        panoLonLst = ["-71.099664", "-71.099844"]
+        panoLatLst = ["42.373572", "42.373593"]
+        greenmonth = ["08"]
+
+        actual = GreenView_Calculate.get_pano_lists_from_file("tests/test_metadata.txt", greenmonth)
+
+        self.assertEqual(actual[0], panoIDLst)
+        self.assertEqual(actual[1], panoDateLst)
+        self.assertEqual(actual[2], panoLonLst)
+        self.assertEqual(actual[3], panoLatLst)
+
 
 if __name__ == '__main__':
     unittest.main()
