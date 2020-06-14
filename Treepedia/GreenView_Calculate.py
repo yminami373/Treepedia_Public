@@ -208,7 +208,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
                 continue
             
             txtfilename = os.path.join(GSVinfoFolder,txtfile)
-            panoIDLst, panoDateLst, panoLonLst, panoLatLst = get_pano_lists_from_file(txtfilename)
+            panoIDLst, panoDateLst, panoLonLst, panoLatLst = get_pano_lists_from_file(txtfilename, greenmonth)
             
             # the output text file to store the green view and pano info
             gvTxt = 'GV_'+os.path.basename(txtfile)
@@ -286,7 +286,7 @@ def get_api_image(url):
     return im
 
 
-def get_pano_lists_from_file(txtfilename):
+def get_pano_lists_from_file(txtfilename, greenmonth):
     lines = open(txtfilename,"r")
 
     # create empty lists, to store the information of panos,and remove duplicates
