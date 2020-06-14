@@ -303,7 +303,8 @@ def get_api_url(panoID, heading, pitch, key):
         "heading": heading,
         "pitch": pitch,
         "sensor": "false",
-        "key": key
+        "key": key,
+        "source": "outdoor"
     }
     URL = "http://maps.googleapis.com/maps/api/streetview?" + urlencode(params)
     return URL
