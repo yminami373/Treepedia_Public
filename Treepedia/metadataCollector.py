@@ -96,7 +96,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum, gre
                     panoInfo = data['panorama']['data_properties']   
                     panoDate, panoId, panoLat, panoLon = getPanoItems(panoInfo)
 
-                    print(f"{panoID} in green month?", check_pano_month_in_greenmonth(panoDate, greenmonth))
+                    print(f"{panoId} in green month?", check_pano_month_in_greenmonth(panoDate, greenmonth))
                     
                     print('The coordinate (%s,%s), panoId is: %s, panoDate is: %s'%(panoLon,panoLat,panoId, panoDate))
                     lineTxt = 'panoID: %s panoDate: %s longitude: %s latitude: %s\n'%(panoId, panoDate, panoLon, panoLat)
