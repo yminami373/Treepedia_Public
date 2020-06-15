@@ -101,11 +101,8 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum, gre
                     panoDate, panoId, panoLat, panoLon = getPanoItems(panoInfo)
 
                     if check_pano_month_in_greenmonth(panoDate, greenmonth) is False:
-                        print("not in greenmonth")
-                        print(panoId, lat, lon)
                         panoLst = streetview.panoids(lon=lon, lat=lat)
                         sorted_panoList = sort_pano_list_by_date(panoLst)
-
                         pp = pprint.PrettyPrinter(indent=4)
                         pp.pprint(sorted_panoList)
                     
@@ -140,7 +137,7 @@ def sort_pano_list_by_date(panoLst):
     return panoLst
 
 
-def get_next_pano_in_greenmonth(panoLst, currentPanoId, greenmonth):
+def get_next_pano_in_greenmonth(panoLst, greenmonth):
     greenmonth_int = [int(month) for month in greenmonth]
     
     for pano in panoLst:
@@ -148,7 +145,7 @@ def get_next_pano_in_greenmonth(panoLst, currentPanoId, greenmonth):
             continue
         panoId = pano['panoid']
         month = pano['month']
-        if panoId != currentPanoId and month in greenmonth_int:
+        if month in greenmonth_int:
             return get_pano_items_from_dict(pano)
 
     print(f"No pano with greenmonth {greenmonth} found. Returning info of latest pano")
