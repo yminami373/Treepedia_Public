@@ -7,3 +7,4 @@ fiona == 1.8.0
 pyproj == 2.6.0
 requests == 2.23.0
 pymeanshift == 0.2.2
+git+https://github.com/robolyst/streetview
