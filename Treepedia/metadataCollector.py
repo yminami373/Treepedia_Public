@@ -156,11 +156,7 @@ def get_next_pano_in_greenmonth(panoLst, currentPanoId, greenmonth):
 
 
 def get_pano_date_str(panoMonth, panoYear):
-    if panoMonth < 10:
-        panoDate = str(panoYear) + '-0' + str(panoMonth)
-    else:
-        panoDate = str(panoYear) + '-' + str(panoMonth)
-    return panoDate
+    return str(panoYear) + '-' + str(panoMonth).zfill(2)
 
 
 # ------------Main Function -------------------    
