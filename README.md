@@ -100,7 +100,8 @@ python3 Treepedia/metadataCollector.py
 
 This function accepts three parameters: input shapefile name (`inputShp`), metadata output folder (`outputTxtFolder`) and batch size (`batchNum`).
 
-In the [example code](Treepedia/metadataCollector.py#L110-L120), input shape file is the `CambridgeStreet_wgs84.shp` file in the `sample-spatialdata` folder. Output folder is named `metadata` and the batch size is set to `1000`, which means the code will save metadata of every 1000 point to a txt file.
+In the [example code](Treepedia/metadataCollector.py#L110-L120), input shape file is the `Cambridge20m.shp` file in the `sample-spatialdata` folder. Output folder is named `metadata` and the batch size is set to `1000`, which means the code will save metadata of every 1000 points to a txt file.
+A list of the green season `greenmonth` (for example, in Cambridge, the green months are May, June, July, August, and September) is also provided.
 
 You can generate your own sample sites based on the `createPoints.py` (Step 1) and specify a different sample site file. 
 
