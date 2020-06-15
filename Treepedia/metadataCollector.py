@@ -149,14 +149,22 @@ def get_next_pano_in_greenmonth(panoLst, currentPanoId, greenmonth):
         panoId = pano['panoid']
         month = pano['month']
         if panoId != currentPanoId and month in greenmonth_int:
-            panoDate = get_pano_date_str(month, pano['year'])
-            panoLat = pano['lat']
-            panoLon = pano['lon']
-            return panoDate, panoId, panoLat, panoLon
+            return get_pano_items_from_dict(pano)
+
+    print(f"No pano with greenmonth {greenmonth} found. Returning info of latest pano")
+    return get_pano_items_from_dict(panoLst[0])
 
 
 def get_pano_date_str(panoMonth, panoYear):
     return str(panoYear) + '-' + str(panoMonth).zfill(2)
+
+
+def get_pano_items_from_dict(pano):
+    panoDate = get_pano_date_str(pano['month'], pano['year'])
+    panoId = pano['panoid']
+    panoLat = pano['lat']
+    panoLon = pano['lon']
+    return panoDate, panoId, panoLat, panoLon
 
 
 # ------------Main Function -------------------    
