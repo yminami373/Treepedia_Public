@@ -169,10 +169,10 @@ if __name__ == "__main__":
 
     os.chdir("sample-spatialdata")
     root = os.getcwd()
-    inputShp = os.path.join(root,'Shibuya100m.shp')
-    outputTxtFolder = os.path.join(root, "metadata_shibuya")
+    inputShp = os.path.join(root,'Cambridge20m.shp')
+    outputTxtFolder = os.path.join(root, "metadata")
     batchNum = 1000
     
-    greenmonth = ['07','08']
+    greenmonth = ['01','02','03','04','05','06','07','08','09','10','11','12']
     GSVpanoMetadataCollector(inputShp, outputTxtFolder, batchNum, greenmonth)
 
