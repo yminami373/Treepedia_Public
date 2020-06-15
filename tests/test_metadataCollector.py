@@ -43,11 +43,72 @@ class TestMetadataCollector(unittest.TestCase):
         # case 1, in greenmonth
         greenmonth = ["08"]
         panoDate1 = "2019-08"
-       self.assertEqual(True, metadataCollector.check_pano_month_in_greenmonth(panoDate1, greenmonth))
+        self.assertEqual(True, metadataCollector.check_pano_month_in_greenmonth(panoDate1, greenmonth))
 
         # case 2, not in greenmonth
         panoDate2 = "2019-07"
         self.assertEqual(False, metadataCollector.check_pano_month_in_greenmonth(panoDate2, greenmonth))
+
+
+    def test_sort_pano_list_by_date(self):
+        pano_list = [   
+            {   'lat': 42.37277274422208,
+                'lon': -71.08278311276163,
+                'month': 7,
+                'panoid': 'nsrTpG-J2x5xL-SPE8x1xw',
+                'year': 2007},
+            {   'lat': 42.37279881264624,
+                'lon': -71.08279280296806,
+                'month': 8,
+                'panoid': 'kFEbzO11yCR-XrQKEjM87g',
+                'year': 2011},
+            {   'lat': 42.37278743408569,
+                'lon': -71.08280824468974,
+                'month': 7,
+                'panoid': 'DWd8HToF5fZMV7Fjnh3COw',
+                'year': 2014},
+            {   'lat': 42.3727815168744,
+                'lon': -71.08279476123815,
+                'month': 9,
+                'panoid': 'P32D4tE8PDMCwXwquHDbFA',
+                'year': 2018},
+            {   'lat': 42.37280035166095,
+                'lon': -71.0827322522328,
+                'panoid': 'WusqZvc_h-rOYGtBRTnciA'},
+            {   'lat': 42.37266257978233,
+                'lon': -71.08283965867031,
+                'panoid': 'S87dfypNal44x8VxW95u5Q'}
+        ]
+        actual = metadataCollector.sort_pano_list_by_date(pano_list)
+        expected = [   
+            {   'lat': 42.3727815168744,
+                'lon': -71.08279476123815,
+                'month': 9,
+                'panoid': 'P32D4tE8PDMCwXwquHDbFA',
+                'year': 2018},
+            {   'lat': 42.37278743408569,
+                'lon': -71.08280824468974,
+                'month': 7,
+                'panoid': 'DWd8HToF5fZMV7Fjnh3COw',
+                'year': 2014},
+            {   'lat': 42.37279881264624,
+                'lon': -71.08279280296806,
+                'month': 8,
+                'panoid': 'kFEbzO11yCR-XrQKEjM87g',
+                'year': 2011},
+            {   'lat': 42.37277274422208,
+                'lon': -71.08278311276163,
+                'month': 7,
+                'panoid': 'nsrTpG-J2x5xL-SPE8x1xw',
+                'year': 2007},
+            {   'lat': 42.37280035166095,
+                'lon': -71.0827322522328,
+                'panoid': 'WusqZvc_h-rOYGtBRTnciA'},
+            {   'lat': 42.37266257978233,
+                'lon': -71.08283965867031,
+                'panoid': 'S87dfypNal44x8VxW95u5Q'}
+        ]
+        self.assertListEqual(expected, actual)
 
 
 if __name__ == '__main__':

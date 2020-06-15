@@ -3,6 +3,8 @@
 
 # Copyright(C) Xiaojiang Li, Ian Seiferling, Marwa Abdulhai, Senseable City Lab, MIT 
 
+from datetime import datetime
+
 def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum, greenmonth):
     '''
     This function is used to call the Google API url to collect the metadata of
@@ -124,6 +126,16 @@ def getPanoItems(panoInfo):
 def check_pano_month_in_greenmonth(panoDate, greenmonth):
     month = panoDate[-2:]
     return month in greenmonth
+
+
+def sort_pano_list_by_date(panoLst):
+    def func(x):
+        if 'year'in x:
+            return datetime(year=x['year'], month=x['month'], day=1)
+        else:
+            return datetime(year=1, month=1, day=1)
+    panoLst.sort(key=func, reverse=True)
+    return panoLst
 
 
 # ------------Main Function -------------------    
