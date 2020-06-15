@@ -154,5 +154,19 @@ class TestMetadataCollector(unittest.TestCase):
         self.assertEqual(expected_panoLon, actual[3])
 
 
+    def test_get_pano_date_str(self):
+        # case 1, month < 10
+        month1 = 9
+        year = 2020
+        actual = metadataCollector.get_pano_date_str(month1, year)
+        self.assertEqual(actual, "2020-09")
+
+        # case 2, month > 10
+        month2 = 11
+        year = 2019
+        actual = metadataCollector.get_pano_date_str(month2, year)
+        self.assertEqual(actual, "2019-11")
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -149,13 +149,18 @@ def get_next_pano_in_greenmonth(panoLst, currentPanoId, greenmonth):
         panoId = pano['panoid']
         month = pano['month']
         if panoId != currentPanoId and month in greenmonth_int:
-            if month < 10:
-                panoDate = str(pano['year']) + '-0' + str(month)
-            else:
-                panoDate = str(pano['year']) + '-' + str(month)
+            panoDate = get_pano_date_str(month, pano['year'])
             panoLat = pano['lat']
             panoLon = pano['lon']
             return panoDate, panoId, panoLat, panoLon
+
+
+def get_pano_date_str(panoMonth, panoYear):
+    if panoMonth < 10:
+        panoDate = str(panoYear) + '-0' + str(panoMonth)
+    else:
+        panoDate = str(panoYear) + '-' + str(panoMonth)
+    return panoDate
 
 
 # ------------Main Function -------------------    
