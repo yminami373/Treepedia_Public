@@ -139,6 +139,25 @@ def sort_pano_list_by_date(panoLst):
     panoLst.sort(key=func, reverse=True)
     return panoLst
 
+
+def get_next_pano_in_greenmonth(panoLst, currentPanoId, greenmonth):
+    greenmonth_int = [int(month) for month in greenmonth]
+    
+    for pano in panoLst:
+        if 'month' not in pano.keys():
+            continue
+        panoId = pano['panoid']
+        month = pano['month']
+        if panoId != currentPanoId and month in greenmonth_int:
+            if month < 10:
+                panoDate = str(pano['year']) + '-0' + str(month)
+            else:
+                panoDate = str(pano['year']) + '-' + str(month)
+            panoLat = pano['lat']
+            panoLon = pano['lon']
+            return panoDate, panoId, panoLat, panoLon
+
+
 # ------------Main Function -------------------    
 if __name__ == "__main__":
     import os, os.path

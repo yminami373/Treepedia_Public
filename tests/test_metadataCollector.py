@@ -111,5 +111,48 @@ class TestMetadataCollector(unittest.TestCase):
         self.assertListEqual(expected, actual)
 
 
+    def test_get_next_pano_in_greenmonth(self):
+        pano_list = [   
+            {   'lat': 42.3727815168744,
+                'lon': -71.08279476123815,
+                'month': 9,
+                'panoid': 'P32D4tE8PDMCwXwquHDbFA',
+                'year': 2018},
+            {   'lat': 42.37278743408569,
+                'lon': -71.08280824468974,
+                'month': 7,
+                'panoid': 'DWd8HToF5fZMV7Fjnh3COw',
+                'year': 2014},
+            {   'lat': 42.37279881264624,
+                'lon': -71.08279280296806,
+                'month': 8,
+                'panoid': 'kFEbzO11yCR-XrQKEjM87g',
+                'year': 2011},
+            {   'lat': 42.37277274422208,
+                'lon': -71.08278311276163,
+                'month': 7,
+                'panoid': 'nsrTpG-J2x5xL-SPE8x1xw',
+                'year': 2007},
+            {   'lat': 42.37280035166095,
+                'lon': -71.0827322522328,
+                'panoid': 'WusqZvc_h-rOYGtBRTnciA'},
+            {   'lat': 42.37266257978233,
+                'lon': -71.08283965867031,
+                'panoid': 'S87dfypNal44x8VxW95u5Q'}
+        ]
+        greenmonth = ["07", "08"]
+        currentId = 'P32D4tE8PDMCwXwquHDbFA'
+        actual = metadataCollector.get_next_pano_in_greenmonth(pano_list, currentId, greenmonth)
+        expected_panoDate = "2014-07"
+        expected_panoId = 'DWd8HToF5fZMV7Fjnh3COw'
+        expected_panoLat = 42.37278743408569
+        expected_panoLon = -71.08280824468974
+
+        self.assertEqual(expected_panoDate, actual[0])
+        self.assertEqual(expected_panoId, actual[1])
+        self.assertEqual(expected_panoLat, actual[2])
+        self.assertEqual(expected_panoLon, actual[3])
+
+
 if __name__ == '__main__':
     unittest.main()
