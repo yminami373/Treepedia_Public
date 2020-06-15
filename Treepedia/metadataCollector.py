@@ -103,8 +103,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum, gre
                     if check_pano_month_in_greenmonth(panoDate, greenmonth) is False:
                         panoLst = streetview.panoids(lon=lon, lat=lat)
                         sorted_panoList = sort_pano_list_by_date(panoLst)
-                        pp = pprint.PrettyPrinter(indent=4)
-                        pp.pprint(sorted_panoList)
+                        panoDate, panoId, panoLat, panoLon = get_next_pano_in_greenmonth(sorted_panoList, greenmonth)
                     
                     #print('The coordinate (%s,%s), panoId is: %s, panoDate is: %s'%(panoLon,panoLat,panoId, panoDate))
                     lineTxt = 'panoID: %s panoDate: %s longitude: %s latitude: %s\n'%(panoId, panoDate, panoLon, panoLat)
