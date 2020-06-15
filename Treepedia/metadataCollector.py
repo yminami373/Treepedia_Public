@@ -27,7 +27,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum, gre
     import math
     import streetview
     import pprint
-    
+
     if not os.path.exists(ouputTextFolder):
         os.makedirs(ouputTextFolder)
     
@@ -103,9 +103,11 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum, gre
                     if check_pano_month_in_greenmonth(panoDate, greenmonth) is False:
                         print("not in greenmonth")
                         print(panoId, lat, lon)
-                        panoids = streetview.panoids(lon=lon, lat=lat)
+                        panoLst = streetview.panoids(lon=lon, lat=lat)
+                        sorted_panoList = sort_pano_list_by_date(panoLst)
+
                         pp = pprint.PrettyPrinter(indent=4)
-                        pp.pprint(panoids)
+                        pp.pprint(sorted_panoList)
                     
                     #print('The coordinate (%s,%s), panoId is: %s, panoDate is: %s'%(panoLon,panoLat,panoId, panoDate))
                     lineTxt = 'panoID: %s panoDate: %s longitude: %s latitude: %s\n'%(panoId, panoDate, panoLon, panoLat)
@@ -136,7 +138,6 @@ def sort_pano_list_by_date(panoLst):
             return datetime(year=1, month=1, day=1)
     panoLst.sort(key=func, reverse=True)
     return panoLst
-
 
 # ------------Main Function -------------------    
 if __name__ == "__main__":
