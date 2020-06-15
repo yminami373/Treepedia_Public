@@ -105,7 +105,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum, gre
                         sorted_panoList = sort_pano_list_by_date(panoLst)
                         panoDate, panoId, panoLat, panoLon = get_next_pano_in_greenmonth(sorted_panoList, greenmonth)
                     
-                    #print('The coordinate (%s,%s), panoId is: %s, panoDate is: %s'%(panoLon,panoLat,panoId, panoDate))
+                    print('The coordinate (%s,%s), panoId is: %s, panoDate is: %s'%(panoLon,panoLat,panoId, panoDate))
                     lineTxt = 'panoID: %s panoDate: %s longitude: %s latitude: %s\n'%(panoId, panoDate, panoLon, panoLat)
                     panoInfoText.write(lineTxt)
                     
@@ -169,8 +169,8 @@ if __name__ == "__main__":
 
     os.chdir("sample-spatialdata")
     root = os.getcwd()
-    inputShp = os.path.join(root,'Cambridge20m.shp')
-    outputTxtFolder = os.path.join(root, "metadata")
+    inputShp = os.path.join(root,'Shibuya100m.shp')
+    outputTxtFolder = os.path.join(root, "metadata_shibuya")
     batchNum = 1000
     
     greenmonth = ['07','08']
