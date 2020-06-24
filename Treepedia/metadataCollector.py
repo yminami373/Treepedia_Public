@@ -5,7 +5,7 @@
 
 from datetime import datetime
 
-def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum, greenmonth):
+def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum, greenmonth, year=""):
     '''
     This function is used to call the Google API url to collect the metadata of
     Google Street View Panoramas. The input of the function is the shpfile of the create sample site, the output
@@ -100,10 +100,10 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum, gre
                     panoInfo = data['panorama']['data_properties']   
                     panoDate, panoId, panoLat, panoLon = getPanoItems(panoInfo)
 
-                    if check_pano_month_in_greenmonth(panoDate, greenmonth) is False:
+                    if check_pano_month_in_greenmonth(panoDate, greenmonth) is False or year != "":
                         panoLst = streetview.panoids(lon=lon, lat=lat)
                         sorted_panoList = sort_pano_list_by_date(panoLst)
-                        panoDate, panoId, panoLat, panoLon = get_next_pano_in_greenmonth(sorted_panoList, greenmonth)
+                        panoDate, panoId, panoLat, panoLon = get_next_pano_in_greenmonth(sorted_panoList, greenmonth, year)
                     
                     print('The coordinate (%s,%s), panoId is: %s, panoDate is: %s'%(panoLon,panoLat,panoId, panoDate))
                     lineTxt = 'panoID: %s panoDate: %s longitude: %s latitude: %s\n'%(panoId, panoDate, panoLon, panoLat)
@@ -136,7 +136,7 @@ def sort_pano_list_by_date(panoLst):
     return panoLst
 
 
-def get_next_pano_in_greenmonth(panoLst, greenmonth):
+def get_next_pano_in_greenmonth(panoLst, greenmonth, year):
     greenmonth_int = [int(month) for month in greenmonth]
     
     for pano in panoLst:

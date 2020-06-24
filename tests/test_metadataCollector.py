@@ -143,6 +143,7 @@ class TestMetadataCollector(unittest.TestCase):
 
         # case 1: pano is next pano (second in list)
         greenmonth = ["07", "08"]
+        year = 2014
         actual = metadataCollector.get_next_pano_in_greenmonth(pano_list, greenmonth)
         expected_panoDate = "2014-07"
         expected_panoId = 'DWd8HToF5fZMV7Fjnh3COw'
@@ -156,6 +157,7 @@ class TestMetadataCollector(unittest.TestCase):
 
         # case 2: pano is third in list as second pano is not in greenmonth
         greenmonth = ["08"]
+        year = 2014
         actual = metadataCollector.get_next_pano_in_greenmonth(pano_list, greenmonth)
         expected_panoDate = "2011-08"
         expected_panoId = 'kFEbzO11yCR-XrQKEjM87g'
@@ -169,6 +171,7 @@ class TestMetadataCollector(unittest.TestCase):
 
         # case 3: no other panos in greenmonth
         greenmonth = ["04"]
+        year = 2014
         actual = metadataCollector.get_next_pano_in_greenmonth(pano_list, greenmonth)
         expected_panoDate = "2018-09"
         expected_panoId = 'P32D4tE8PDMCwXwquHDbFA'
