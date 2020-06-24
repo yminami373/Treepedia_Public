@@ -142,7 +142,6 @@ def get_next_pano_in_greenmonth(panoLst, greenmonth, year):
     for pano in panoLst:
         if 'month' not in pano.keys():
             continue
-        panoId = pano['panoid']
         month = pano['month']
         if month in greenmonth_int:
             return get_pano_items_from_dict(pano)
