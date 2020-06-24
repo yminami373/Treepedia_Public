@@ -103,6 +103,8 @@ This function accepts three parameters: input shapefile name (`inputShp`), metad
 In the [example code](Treepedia/metadataCollector.py#L110-L120), input shape file is the `Cambridge20m.shp` file in the `sample-spatialdata` folder. Output folder is named `metadata` and the batch size is set to `1000`, which means the code will save metadata of every 1000 points to a txt file.
 A list of the green season `greenmonth` (for example, in Cambridge, the green months are May, June, July, August, and September) is also provided.
 
+Optionally, you can also provide `year` to retrieve panoramas that are taken in that year or older than that year. (For example, if `year` is set to 2018, only panoramas dated 2018 or before will be retrieved.)
+
 You can generate your own sample sites based on the `createPoints.py` (Step 1) and specify a different sample site file. 
 
 

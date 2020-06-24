@@ -16,6 +16,7 @@ def GSVpanoMetadataCollector(samplesFeatureClass, ouputTextFolder, batchNum, gre
         batchNum: the number of sites proced every time. If batch size is 1000, the code will save metadata of every 1000 point to a txt file.
         ouputTextFolder: the output folder for the panoinfo
         greenmonth: a list of the green season, for example in Boston, greenmonth = ['05','06','07','08','09']
+        year: optional. if specified, only panos dated in that year or older will be returned
         
     '''
     
@@ -172,7 +173,11 @@ if __name__ == "__main__":
     inputShp = os.path.join(root,'Cambridge20m.shp')
     outputTxtFolder = os.path.join(root, "metadata")
     batchNum = 1000
-    
+
     greenmonth = ['01','02','03','04','05','06','07','08','09','10','11','12']
     GSVpanoMetadataCollector(inputShp, outputTxtFolder, batchNum, greenmonth)
+
+    # to get pano dated in 2018 or older (optional)
+    # year = 2018 
+    # GSVpanoMetadataCollector(inputShp, outputTxtFolder, batchNum, greenmonth, year)
 
