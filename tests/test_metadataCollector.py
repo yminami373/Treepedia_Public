@@ -184,6 +184,38 @@ class TestMetadataCollector(unittest.TestCase):
         self.assertEqual(expected_panoLon, actual[3])
 
 
+        # case 4: year is unspecified ("")
+        # should return latest pano in greenmonth
+        greenmonth = ["07"]
+        year = ""
+        actual = metadataCollector.get_next_pano_in_greenmonth(pano_list, greenmonth, year)
+        expected_panoDate = "2014-07"
+        expected_panoId = 'DWd8HToF5fZMV7Fjnh3COw'
+        expected_panoLat = 42.37278743408569
+        expected_panoLon = -71.08280824468974
+
+        self.assertEqual(expected_panoDate, actual[0])
+        self.assertEqual(expected_panoId, actual[1])
+        self.assertEqual(expected_panoLat, actual[2])
+        self.assertEqual(expected_panoLon, actual[3])
+
+
+        # case 5: year is given
+        # should return pano in greenmonth older than specified year
+        greenmonth = ["07", "08"]
+        year = 2013
+        actual = metadataCollector.get_next_pano_in_greenmonth(pano_list, greenmonth, year)
+        expected_panoDate = "2011-08"
+        expected_panoId = 'kFEbzO11yCR-XrQKEjM87g'
+        expected_panoLat = 42.37279881264624
+        expected_panoLon = -71.08279280296806
+
+        self.assertEqual(expected_panoDate, actual[0])
+        self.assertEqual(expected_panoId, actual[1])
+        self.assertEqual(expected_panoLat, actual[2])
+        self.assertEqual(expected_panoLon, actual[3])
+
+
     def test_get_pano_date_str(self):
         # case 1, month < 10
         month1 = 9

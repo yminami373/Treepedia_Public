@@ -143,7 +143,8 @@ def get_next_pano_in_greenmonth(panoLst, greenmonth, year):
         if 'month' not in pano.keys():
             continue
         month = pano['month']
-        if month in greenmonth_int:
+        pano_year = pano['year']
+        if month in greenmonth_int and (year == "" or year >= pano_year):
             return get_pano_items_from_dict(pano)
 
     print(f"No pano with greenmonth {greenmonth} found. Returning info of latest pano")
