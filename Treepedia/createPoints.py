@@ -91,6 +91,9 @@ def createPoints(inshp, outshp, mini_dist):
                         project2 = partial(pyproj.transform, pyproj.Proj(init='EPSG:3857'), pyproj.Proj(init='EPSG:4326'))
                         point = transform(project2, point)
                         output.write({'geometry': mapping(point),'properties': {'id': 1}})
+                except NotImplementedError:
+                    print("Please make sure this is a LineString.")
+                    print(sys.exc_info())
                 except:
                     print("You should make sure the input shapefile is WGS84")
                     print(sys.exc_info())
