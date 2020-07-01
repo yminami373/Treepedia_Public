@@ -93,7 +93,7 @@ def createPoints(inshp, outshp, mini_dist):
                         output.write({'geometry':mapping(point),'properties': {'id':1}})
                 except:
                     print ("You should make sure the input shapefile is WGS84")
-
+                    print(sys.exc_info())
                     return
                     
     print("Process Complete")
