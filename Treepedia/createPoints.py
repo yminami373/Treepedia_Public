@@ -48,8 +48,7 @@ def createPoints(inshp, outshp, mini_dist):
         fiona.remove(temp_cleanedStreetmap, 'ESRI Shapefile')
     
     # clean the original street maps by removing highways, if it the street map not from Open street data, users'd better to clean the data themselve
-    with fiona.open(inshp) as source, 
-    fiona.open(temp_cleanedStreetmap, 'w', driver=source.driver, crs=source.crs,schema=source.schema) as dest:
+    with fiona.open(inshp) as source, fiona.open(temp_cleanedStreetmap, 'w', driver=source.driver, crs=source.crs,schema=source.schema) as dest:
         
         for feat in source:
             try:
