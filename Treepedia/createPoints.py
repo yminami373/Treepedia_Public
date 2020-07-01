@@ -3,6 +3,17 @@
 # Copyright(C) Ian Seiferling, Xiaojiang Li, Marwa Abdulhai, Senseable City Lab, MIT 
 # First version July 21 2017
 
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
+import fiona
+import os,os.path
+import sys
+import pyproj
+from shapely.geometry import shape,mapping
+from shapely.ops import transform
+from functools import partial
+from fiona.crs import from_epsg
 
 # now run the python file: createPoints.py, the input shapefile has to be in projection of WGS84, 4326
 def createPoints(inshp, outshp, mini_dist):
@@ -22,16 +33,7 @@ def createPoints(inshp, outshp, mini_dist):
     
     '''
     
-    import warnings
-    warnings.simplefilter(action='ignore', category=FutureWarning)
 
-    import fiona
-    import os,os.path
-    import pyproj
-    from shapely.geometry import shape,mapping
-    from shapely.ops import transform
-    from functools import partial
-    from fiona.crs import from_epsg
 
     count = 0
     s = {'trunk_link','tertiary','motorway','motorway_link','steps', None, ' ','pedestrian','primary', 'primary_link','footway','tertiary_link', 'trunk','secondary','secondary_link','tertiary_link','bridleway','service'}
@@ -91,6 +93,7 @@ def createPoints(inshp, outshp, mini_dist):
                         output.write({'geometry':mapping(point),'properties': {'id':1}})
                 except:
                     print ("You should make sure the input shapefile is WGS84")
+
                     return
                     
     print("Process Complete")
@@ -103,8 +106,6 @@ def createPoints(inshp, outshp, mini_dist):
 # Note: make sure the input linear featureclass (shapefile) is in WGS 84 or ESPG: 4326
 # ------------main ----------
 if __name__ == "__main__":
-    import os,os.path
-    import sys
     
     os.chdir("sample-spatialdata")
     root = os.getcwd()
