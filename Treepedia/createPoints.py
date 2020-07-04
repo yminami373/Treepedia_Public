@@ -82,6 +82,9 @@ def createPoints(inshp, outshp, mini_dist):
                     project = partial(pyproj.transform,pyproj.Proj(init='EPSG:4326'),pyproj.Proj(init='EPSG:3857')) #3857 is psudo WGS84 the unit is meter
                     
                     line2 = transform(project, first)
+                    if line2.geom_type != 'MultiLineString':
+                        continue
+                        # TODO: transform to LineString
                     linestr = list(line2.coords)
                     dist = mini_dist #set
                     for distance in range(0, int(line2.length), dist):
@@ -91,9 +94,6 @@ def createPoints(inshp, outshp, mini_dist):
                         project2 = partial(pyproj.transform, pyproj.Proj(init='EPSG:3857'), pyproj.Proj(init='EPSG:4326'))
                         point = transform(project2, point)
                         output.write({'geometry': mapping(point),'properties': {'id': 1}})
-                except NotImplementedError:
-                    print("Please make sure this is a LineString.")
-                    print(sys.exc_info())
                 except:
                     print("You should make sure the input shapefile is WGS84")
                     print(sys.exc_info())
@@ -109,11 +109,12 @@ def createPoints(inshp, outshp, mini_dist):
 # ------------main ----------
 if __name__ == "__main__":
     
-    os.chdir("sample-spatialdata")
+    os.chdir("sample-spatialdata/yokohama_shp")
     root = os.getcwd()
-    inputShp = os.path.join(root,'CambridgeStreet_wgs84.shp')
-    outputShp = os.path.join(root,'Cambridge20m.shp')
-    mini_dist = 20 #the minimum distance between two generated points in meter
+    inputShp = os.path.join(root,'Yokohama_cut.shp')
+    outputShp = os.path.join(root,'Yokohama_100m_test.shp')
+    mini_dist = 100 #the minimum distance between two generated points in meter
+
     createPoints(inputShp, outputShp, mini_dist)
 
 
