@@ -82,7 +82,7 @@ def createPoints(inshp, outshp, mini_dist):
                     project = partial(pyproj.transform,pyproj.Proj(init='EPSG:4326'),pyproj.Proj(init='EPSG:3857')) #3857 is psudo WGS84 the unit is meter
                     
                     line2 = transform(project, first)
-                    if line2.geom_type != 'MultiLineString':
+                    if line2.geom_type == 'MultiLineString':
                         continue
                         # TODO: transform to LineString
                     linestr = list(line2.coords)
