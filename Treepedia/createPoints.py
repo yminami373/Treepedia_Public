@@ -73,27 +73,33 @@ def createPoints(inshp, outshp, mini_dist):
     with fiona.Env():
         with fiona.open(outshp, 'w', crs=from_epsg(4326), driver='ESRI Shapefile', schema=schema) as output:
             for line in fiona.open(temp_cleanedStreetmap):
-                first = shape(line['geometry'])
-                
-                length = first.length
+                line_geom = line['geometry']
+                featureType = line_geom['type']
                 
                 try:
-                    # convert degree to meter, in order to split by distance in meter
-                    project = partial(pyproj.transform,pyproj.Proj(init='EPSG:4326'),pyproj.Proj(init='EPSG:3857')) #3857 is psudo WGS84 the unit is meter
-                    
-                    line2 = transform(project, first)
-                    if line2.geom_type == 'MultiLineString':
+                    if featureType == 'MultiLineString':
                         continue
                         # TODO: transform to LineString
-                    linestr = list(line2.coords)
-                    dist = mini_dist #set
-                    for distance in range(0, int(line2.length), dist):
-                        point = line2.interpolate(distance)
-                        
-                        # convert the local projection back the the WGS84 and write to the output shp
-                        project2 = partial(pyproj.transform, pyproj.Proj(init='EPSG:3857'), pyproj.Proj(init='EPSG:4326'))
-                        point = transform(project2, point)
-                        output.write({'geometry': mapping(point),'properties': {'id': 1}})
+
+                    elif featureType == 'LineString':
+                        line_geom_degree = shape(line_geom)
+
+                        # convert degree to meter, in order to split by distance in meter
+                        project = partial(pyproj.transform,pyproj.Proj(init='EPSG:4326'),pyproj.Proj(init='EPSG:3857')) #3857 is psudo WGS84 the unit is meter
+                        line_geom_meter = transform(project, line_geom_degree)
+
+                        for distance in range(0, int(line_geom_meter.length), mini_dist):
+                            point = line_geom_meter.interpolate(distance)
+                            
+                            # convert the local projection back the the WGS84 and write to the output shp
+                            project2 = partial(pyproj.transform, pyproj.Proj(init='EPSG:3857'), pyproj.Proj(init='EPSG:4326'))
+                            point_deg = transform(project2, point)
+                            output.write(
+                                {
+                                    'geometry': mapping(point_deg),
+                                    'properties': {'id': 1}
+                                }
+                                )
                 except:
                     print("You should make sure the input shapefile is WGS84")
                     print(sys.exc_info())
