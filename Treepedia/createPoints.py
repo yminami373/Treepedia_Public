@@ -100,6 +100,8 @@ def createPoints(inshp, outshp, mini_dist):
                                     'properties': {'id': 1}
                                 }
                                 )
+                except (KeyboardInterrupt, SystemExit):
+                    raise
                 except:
                     print("You should make sure the input shapefile is WGS84")
                     print(sys.exc_info())
