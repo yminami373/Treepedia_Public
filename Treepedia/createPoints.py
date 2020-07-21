@@ -117,11 +117,11 @@ def createPoints(inshp, outshp, mini_dist):
 # ------------main ----------
 if __name__ == "__main__":
     
-    os.chdir("sample-spatialdata/yokohama_shp")
+    os.chdir("sample-spatialdata/")
     root = os.getcwd()
-    inputShp = os.path.join(root,'Yokohama_cut.shp')
-    outputShp = os.path.join(root,'Yokohama_100m_test.shp')
-    mini_dist = 100 #the minimum distance between two generated points in meter
+    inputShp = os.path.join(root,'CambridgeStreet_wgs84.shp')
+    outputShp = os.path.join(root,'CambridgeStreet_20m.shp')
+    mini_dist = 20 #the minimum distance between two generated points, in meter
 
     createPoints(inputShp, outputShp, mini_dist)
 
