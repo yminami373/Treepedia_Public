@@ -21,72 +21,78 @@ import numpy as np
 import requests
 import sys
 from urllib.parse import urlencode
+
+import os, csv, torch, scipy.io, torchvision.transforms
+from mit_semseg.models import ModelBuilder, SegmentationModule
+from mit_semseg.utils import colorEncode
+
     
-def graythresh(array,level):
-    '''array: is the numpy array waiting for processing
-    return thresh: is the result got by OTSU algorithm
-    if the threshold is less than level, then set the level as the threshold
-    by Xiaojiang Li
-    '''
+# def graythresh(array,level):
+#     '''array: is the numpy array waiting for processing
+#     return thresh: is the result got by OTSU algorithm
+#     if the threshold is less than level, then set the level as the threshold
+#     by Xiaojiang Li
+#     '''
     
-    import numpy as np
-    np.seterr(divide='ignore', invalid='ignore')
+#     import numpy as np
+#     np.seterr(divide='ignore', invalid='ignore')
     
-    maxVal = np.max(array)
-    minVal = np.min(array)
+#     maxVal = np.max(array)
+#     minVal = np.min(array)
     
-#   if the inputImage is a float of double dataset then we transform the data 
-#   in to byte and range from [0 255]
-    if maxVal <= 1:
-        array = array*255
-    elif maxVal >= 256:
-        array = np.int((array - minVal)/(maxVal - minVal))
+# #   if the inputImage is a float of double dataset then we transform the data 
+# #   in to byte and range from [0 255]
+#     if maxVal <= 1:
+#         array = array*255
+#     elif maxVal >= 256:
+#         array = np.int((array - minVal)/(maxVal - minVal))
     
-    # turn the negative to natural number
-    negIdx = np.where(array < 0)
-    array[negIdx] = 0
+#     # turn the negative to natural number
+#     negIdx = np.where(array < 0)
+#     array[negIdx] = 0
     
-    # calculate the hist of 'array'
-    dims = np.shape(array)
-    hist = np.histogram(array,range(257))
-    P_hist = hist[0]*1.0/np.sum(hist[0])
+#     # calculate the hist of 'array'
+#     dims = np.shape(array)
+#     hist = np.histogram(array,range(257))
+#     P_hist = hist[0]*1.0/np.sum(hist[0])
     
-    omega = P_hist.cumsum()
+#     omega = P_hist.cumsum()
     
-    temp = np.arange(256)
-    mu = P_hist*(temp+1)
-    mu = mu.cumsum()
+#     temp = np.arange(256)
+#     mu = P_hist*(temp+1)
+#     mu = mu.cumsum()
     
-    n = len(mu)
-    mu_t = mu[n-1]
+#     n = len(mu)
+#     mu_t = mu[n-1]
     
-    sigma_b_squared = (mu_t*omega - mu)**2/(omega*(1-omega))
+#     sigma_b_squared = (mu_t*omega - mu)**2/(omega*(1-omega))
     
-    # try to found if all sigma_b squrered are NaN or Infinity
-    indInf = np.where(sigma_b_squared == np.inf)
+#     # try to found if all sigma_b squrered are NaN or Infinity
+#     indInf = np.where(sigma_b_squared == np.inf)
     
-    CIN = 0
-    if len(indInf[0])>0:
-        CIN = len(indInf[0])
+#     CIN = 0
+#     if len(indInf[0])>0:
+#         CIN = len(indInf[0])
     
-    maxval = np.max(sigma_b_squared)
+#     maxval = np.max(sigma_b_squared)
     
-    IsAllInf = CIN == 256
-    if IsAllInf !=1:
-        index = np.where(sigma_b_squared==maxval)
-        idx = np.mean(index)
-        threshold = (idx - 1)/255.0
-    else:
-        threshold = level
+#     IsAllInf = CIN == 256
+#     if IsAllInf !=1:
+#         index = np.where(sigma_b_squared==maxval)
+#         idx = np.mean(index)
+#         threshold = (idx - 1)/255.0
+#     else:
+#         threshold = level
     
-    if np.isnan(threshold):
-        threshold = level
+#     if np.isnan(threshold):
+#         threshold = level
     
-    return threshold
+#     return threshold
 
 
 
-def VegetationClassification(Img):
+
+def VegetationClassification(Img, segmentation_module):
     '''
     This function is used to classify the green vegetation from GSV image,
     This is based on object based and otsu automatically thresholding method
@@ -97,68 +103,120 @@ def VegetationClassification(Img):
     By Xiaojiang Li
     '''
     
-    import pymeanshift as pms
-    import numpy as np
     
-    # use the meanshift segmentation algorithm to segment the original GSV image
-    (segmented_image, labels_image, number_regions) = pms.segment(Img,spatial_radius=6,
-                                                     range_radius=7, min_density=40)
+
     
-    I = segmented_image/255.0
+
+    # Load and normalize one image as a singleton tensor batch
+    pil_to_tensor = torchvision.transforms.Compose([
+        torchvision.transforms.ToTensor(),
+        torchvision.transforms.Normalize(
+            mean=[0.485, 0.456, 0.406], # These are RGB mean+std values
+            std=[0.229, 0.224, 0.225])  # across a large photo dataset.
+    ])
+
+    img_data = pil_to_tensor(Img)
+    singleton_batch = {'img_data': img_data[None].cuda()}
+    output_size = img_data.shape[1:]
+
+
+
+    # Run the segmentation at the highest resolution.
+    with torch.no_grad():
+        scores = segmentation_module(singleton_batch, segSize=output_size)
+        
+    # Get the predicted scores for each pixel
+    _, pred = torch.max(scores, dim=1)
+    pred = pred.cpu()[0].numpy()
+    # visualize_result(img_original, pred)
+    # pred_color = colorEncode(pred, colors).astype(numpy.uint8)
+
+    greenIndex = {
+        'treeIndex' : 4,
+        'grassIndex' : 9,
+        'palmIndex' : 72
+    }
+    greenPxlNum = 0
+    for i in greenIndex.values():
+        greenPxlNum += len(np.where(pred == i)[0])
+
     
-    red = I[:,:,0]
-    green = I[:,:,1]
-    blue = I[:,:,2]
     
-    # calculate the difference between green band with other two bands
-    green_red_Diff = green - red
-    green_blue_Diff = green - blue
     
-    ExG = green_red_Diff + green_blue_Diff
-    diffImg = green_red_Diff*green_blue_Diff
-    
-    redThreImgU = red < 0.6
-    greenThreImgU = green < 0.9
-    blueThreImgU = blue < 0.6
-    
-    shadowRedU = red < 0.3
-    shadowGreenU = green < 0.3
-    shadowBlueU = blue < 0.3
-    del red, blue, green, I
-    
-    greenImg1 = redThreImgU * blueThreImgU*greenThreImgU
-    greenImgShadow1 = shadowRedU*shadowGreenU*shadowBlueU
-    del redThreImgU, greenThreImgU, blueThreImgU
-    del shadowRedU, shadowGreenU, shadowBlueU
-    
-    greenImg3 = diffImg > 0.0
-    greenImg4 = green_red_Diff > 0
-    threshold = graythresh(ExG, 0.1)
-    
-    if threshold > 0.1:
-        threshold = 0.1
-    elif threshold < 0.05:
-        threshold = 0.05
-    
-    greenImg2 = ExG > threshold
-    greenImgShadow2 = ExG > 0.05
-    greenImg = greenImg1*greenImg2 + greenImgShadow2*greenImgShadow1
-    del ExG,green_blue_Diff,green_red_Diff
-    del greenImgShadow1,greenImgShadow2
-    
-    # calculate the percentage of the green vegetation
-    greenPxlNum = len(np.where(greenImg != 0)[0])
     greenPercent = greenPxlNum/(400.0*400)*100
-    del greenImg1,greenImg2
-    del greenImg3,greenImg4
+    # TODO automatially detect size of image
+    pred_index = pred
     
-    return greenPercent
+
+
+    return greenPercent, pred_index
+    
+
+
+
+
+    # import pymeanshift as pms
+    # import numpy as np
+    
+    # # use the meanshift segmentation algorithm to segment the original GSV image
+    # (segmented_image, labels_image, number_regions) = pms.segment(Img,spatial_radius=6,
+    #                                                  range_radius=7, min_density=40)
+    
+    # I = segmented_image/255.0
+    
+    # red = I[:,:,0]
+    # green = I[:,:,1]
+    # blue = I[:,:,2]
+    
+    # # calculate the difference between green band with other two bands
+    # green_red_Diff = green - red
+    # green_blue_Diff = green - blue
+    
+    # ExG = green_red_Diff + green_blue_Diff
+    # diffImg = green_red_Diff*green_blue_Diff
+    
+    # redThreImgU = red < 0.6
+    # greenThreImgU = green < 0.9
+    # blueThreImgU = blue < 0.6
+    
+    # shadowRedU = red < 0.3
+    # shadowGreenU = green < 0.3
+    # shadowBlueU = blue < 0.3
+    # del red, blue, green, I
+    
+    # greenImg1 = redThreImgU * blueThreImgU*greenThreImgU
+    # greenImgShadow1 = shadowRedU*shadowGreenU*shadowBlueU
+    # del redThreImgU, greenThreImgU, blueThreImgU
+    # del shadowRedU, shadowGreenU, shadowBlueU
+    
+    # greenImg3 = diffImg > 0.0
+    # greenImg4 = green_red_Diff > 0
+    # threshold = graythresh(ExG, 0.1)
+    
+    # if threshold > 0.1:
+    #     threshold = 0.1
+    # elif threshold < 0.05:
+    #     threshold = 0.05
+    
+    # greenImg2 = ExG > threshold
+    # greenImgShadow2 = ExG > 0.05
+    # greenImg = greenImg1*greenImg2 + greenImgShadow2*greenImgShadow1
+    # del ExG,green_blue_Diff,green_red_Diff
+    # del greenImgShadow1,greenImgShadow2
+    
+    # # calculate the percentage of the green vegetation
+    # greenPxlNum = len(np.where(greenImg != 0)[0])
+    # greenPercent = greenPxlNum/(400.0*400)*100
+    # del greenImg1,greenImg2
+    # del greenImg3,greenImg4
+    
+    # return greenPercent
 
 
 
 # using 18 directions is too time consuming, therefore, here I only use 6 horizontal directions
 # Each time the function will read a text, with 1000 records, and save the result as a single TXT
-def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_file):
+def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_file, semsegPath):
     
     """
     This function is used to download the GSV from the information provide
@@ -193,9 +251,15 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
     numGSVImg = len(headingArr)*1.0
     pitch = 0
     
+    # load model from URL
+    model = load_model_from_url(semsegPath)
+    print('Pretrained model has been successfully downloaded')
+    
     # create a folder for GSV images and grenView Info
     if not os.path.exists(outTXTRoot):
         os.makedirs(outTXTRoot)
+    
+    
     
     # the input GSV info should be in a folder
     if not os.path.isdir(GSVinfoFolder):
@@ -236,6 +300,8 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
                     # calculate the green view index
                     greenPercent = 0.0
 
+                    
+
                     for heading in headingArr:
                         print("Heading is: ",heading)
                         
@@ -247,8 +313,22 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
                         # classify the GSV images and calcuate the GVI
                         try:
                             im = get_api_image(URL)
-                            percent = VegetationClassification(im)
+                            print(im.shape)
+                            percent, pred = VegetationClassification(im, model)
+                            print(percent)
                             greenPercent = greenPercent + percent
+
+                            #load colors from csv file in semseg module to define each object type
+                            object_colors = scipy.io.loadmat(os.path.join(semsegPath, 'data/color150.mat'))['colors']
+
+                            
+                            original_im = Image.fromarray(im)
+                            original_im = original_im.save('original_' + str(panoID) +'_' +str(heading)+'.jpg')
+                            
+                            pred_color = colorEncode(pred, object_colors).astype(np.uint8)
+                            pred_im = Image.fromarray(pred_color)
+                            pred_im = pred_im.save('pred_' + str(panoID) +'_' +str(heading)+'.jpg')
+                            
 
                         # if the GSV images are not download successfully or failed to run, then return a null value
                         except:
@@ -323,6 +403,47 @@ def get_pano_lists_from_file(txtfilename, greenmonth):
 
     return panoIDLst, panoDateLst, panoLonLst, panoLatLst
 
+    
+
+def load_model_from_url(semsegPath):
+    
+    model_urls = {
+        'encoder' : 'http://sceneparsing.csail.mit.edu/model/pytorch/ade20k-resnet50dilated-ppm_deepsup/encoder_epoch_20.pth',
+        'decoder' : 'http://sceneparsing.csail.mit.edu/model/pytorch/ade20k-resnet50dilated-ppm_deepsup/decoder_epoch_20.pth'
+    }
+
+    if not os.path.exists(os.path.join(semsegPath, 'ckpt')):
+        os.makedirs(os.path.join(semsegPath, 'ckpt'))
+
+    r = requests.get(model_urls['encoder'])  
+    with open(os.path.join(semsegPath, 'ckpt/encoder.pth'), 'wb') as f:
+        f.write(r.content)
+    r = requests.get(model_urls['decoder'])  
+    with open(os.path.join(semsegPath, 'ckpt/decoder.pth'), 'wb') as f:
+        f.write(r.content)
+    
+
+
+    net_encoder = ModelBuilder.build_encoder(
+        arch='resnet50dilated',
+        fc_dim=2048,
+        weights=os.path.join(semsegPath, 'ckpt/encoder.pth'))
+    net_decoder = ModelBuilder.build_decoder(
+        arch='ppm_deepsup',
+        fc_dim=2048,
+        num_class=150,
+        weights=os.path.join(semsegPath, 'ckpt/decoder.pth'),
+        use_softmax=True)
+
+    crit = torch.nn.NLLLoss(ignore_index=-1)
+    segmentation_module = SegmentationModule(net_encoder, net_decoder, crit)
+    segmentation_module.eval()
+    segmentation_module.cuda()
+
+    return segmentation_module
+
+    
+
 
 # ------------------------------Main function-------------------------------
 if __name__ == "__main__":
@@ -337,7 +458,14 @@ if __name__ == "__main__":
 
     os.chdir("../")
     key_file = os.path.join(os.getcwd(), 'keys.txt')
+
+    os.chdir('../')
+    os.chdir('../')
+    semsegPath = os.path.join(os.getcwd(), 'semantic-segmentation-pytorch')
+    os.chdir(os.path.join(os.getcwd(), 'Treepedia_Public'))
+
+
     
-    GreenViewComputing_ogr_6Horizon(GSVinfoRoot,outputTextPath, greenmonth, key_file)
+    GreenViewComputing_ogr_6Horizon(GSVinfoRoot,outputTextPath, greenmonth, key_file, semsegPath)
 
 
