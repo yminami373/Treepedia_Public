@@ -41,9 +41,6 @@ def VegetationClassification(Img, segmentation_module):
     By Xiaojiang Li
     '''
     
-    
-
-    
 
     # Load and normalize one image as a singleton tensor batch
     pil_to_tensor = torchvision.transforms.Compose([
@@ -59,15 +56,13 @@ def VegetationClassification(Img, segmentation_module):
 
 
 
-    # Run the segmentation at the highest resolution.
+    # Run the segmentation
     with torch.no_grad():
         scores = segmentation_module(singleton_batch, segSize=output_size)
         
     # Get the predicted scores for each pixel
     _, pred = torch.max(scores, dim=1)
     pred = pred.cpu()[0].numpy()
-    # visualize_result(img_original, pred)
-    # pred_color = colorEncode(pred, colors).astype(numpy.uint8)
 
     greenIndex = {
         'treeIndex' : 4,
@@ -75,27 +70,14 @@ def VegetationClassification(Img, segmentation_module):
         'palmIndex' : 72
     }
     greenPxlNum = 0
+    
     for i in greenIndex.values():
         greenPxlNum += len(np.where(pred == i)[0])
 
-    
-    
-    
     greenPercent = greenPxlNum/(400.0*400)*100
-    # TODO automatially detect size of image
-    pred_index = pred
+
+    return greenPercent
     
-
-
-    return greenPercent, pred_index
-    
-
-
-
-
-    
-
-
 
 # using 18 directions is too time consuming, therefore, here I only use 6 horizontal directions
 # Each time the function will read a text, with 1000 records, and save the result as a single TXT
@@ -136,7 +118,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
     
     # load model from URL
     model = load_model_from_url(semsegPath)
-    print('Pretrained model has been successfully downloaded')
+    print('Trained model has been successfully downloaded')
     
     # create a folder for GSV images and grenView Info
     if not os.path.exists(outTXTRoot):
@@ -196,22 +178,9 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
                         # classify the GSV images and calcuate the GVI
                         try:
                             im = get_api_image(URL)
-                            print(im.shape)
-                            percent, pred = VegetationClassification(im, model)
-                            print(percent)
+                            percent= VegetationClassification(im, model)
                             greenPercent = greenPercent + percent
 
-                            #load colors from csv file in semseg module to define each object type
-                            object_colors = scipy.io.loadmat(os.path.join(semsegPath, 'data/color150.mat'))['colors']
-
-                            
-                            original_im = Image.fromarray(im)
-                            original_im = original_im.save('original_' + str(panoID) +'_' +str(heading)+'.jpg')
-                            
-                            pred_color = colorEncode(pred, object_colors).astype(np.uint8)
-                            pred_im = Image.fromarray(pred_color)
-                            pred_im = pred_im.save('pred_' + str(panoID) +'_' +str(heading)+'.jpg')
-                            
 
                         # if the GSV images are not download successfully or failed to run, then return a null value
                         except:
@@ -305,7 +274,6 @@ def load_model_from_url(semsegPath):
     with open(os.path.join(semsegPath, 'ckpt/decoder.pth'), 'wb') as f:
         f.write(r.content)
     
-
 
     net_encoder = ModelBuilder.build_encoder(
         arch='resnet50dilated',
