@@ -118,7 +118,7 @@ def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_f
     
     # load model from URL
     model = load_model_from_url(semsegPath)
-    print('Trained model has been successfully downloaded')
+    print('Trained models have been successfully downloaded')
     
     # create a folder for GSV images and grenView Info
     if not os.path.exists(outTXTRoot):
