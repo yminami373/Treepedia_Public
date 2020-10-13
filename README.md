@@ -129,7 +129,7 @@ The [example code](Treepedia/GreenView_Calculate.py#L297-L310) is the collected 
 
 You can open several process to run this code simutaniously, because the output will be saved as txt files in folder. If the output txt file is already there, then the code will move to the next metadata txt file and generate the GVI for next 1000 points.
 
-## Step 3' GVI Calculation of points using semantic segmentation module by MIT
+## Step 3' GVI Calculation of points using　semantic segmentation
 
 This step is another way of calculating the green view index with a different algorithm to segment the greenery from step 3. The workflow of this step is based on step 3. Using the semantic segmentation library [here](https://github.com/CSAILVision/semantic-segmentation-pytorch), the algorithm can determine the object types for each pixel in the GSV images and calculate the GVI values. 
 
