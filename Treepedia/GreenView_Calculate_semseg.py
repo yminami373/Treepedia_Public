@@ -31,14 +31,16 @@ from mit_semseg.utils import colorEncode
 
 
 def VegetationClassification(Img, segmentation_module):
+
     '''
-    This function is used to classify the green vegetation from GSV image,
-    This is based on object based and otsu automatically thresholding method
+    This function is used to classify the green vegetation from GSV image.
+    This is based on semantic segmentation method.
     The season of GSV images were also considered in this function
-        Img: the numpy array image, eg. Img = np.array(Image.open(StringIO(response.content)))
+        Img: the numpy array image, eg. Img = np.array(Image.open(response.raw))
+        segmentation_module: the pre-configured model for semantic segmentation, eg. segmentation_module = SegmentationModule(net_encoder, net_decoder, crit)
         return the percentage of the green vegetation pixels in the GSV image
     
-    By Xiaojiang Li
+    By Yuki Minami
     '''
     
 
@@ -83,20 +85,23 @@ def VegetationClassification(Img, segmentation_module):
 # Each time the function will read a text, with 1000 records, and save the result as a single TXT
 def GreenViewComputing_ogr_6Horizon(GSVinfoFolder, outTXTRoot, greenmonth, key_file, semsegPath):
     
-    """
+
+    '''
     This function is used to download the GSV from the information provide
     by the gsv info txt, and save the result to a shapefile
-    
+
     Required modules: numpy, requests, and PIL
-    
+
         GSVinfoTxt: the input folder name of GSV info txt
         outTXTRoot: the output folder to store result green result in txt files
         greenmonth: a list of the green season, for example in Boston, greenmonth = ['05','06','07','08','09']
         key_file: the API keys in txt file, each key is one row, I prepared five keys, you can replace by your owne keys if you have Google Account
-        
-    last modified by Xiaojiang Li, MIT Senseable City Lab, March 25, 2018
-    
-    """
+        semsegPath: the path to the cloned repository from GitHub https://github.com/CSAILVision/semantic-segmentation-pytorch.git
+
+    last modified by Yuki Minami, 23 October 2020
+
+    '''
+
 
     
     # read the Google Street View API key files, you can also replace these keys by your own
@@ -267,7 +272,7 @@ def load_model_from_url(semsegPath):
     if not os.path.exists(os.path.join(semsegPath, 'ckpt')):
         os.makedirs(os.path.join(semsegPath, 'ckpt'))
 
-    r = requests.get(model_urls['encoder'])  
+    r = requests.get(model_urls['encoder'])
     with open(os.path.join(semsegPath, 'ckpt/encoder.pth'), 'wb') as f:
         f.write(r.content)
     r = requests.get(model_urls['decoder'])  
